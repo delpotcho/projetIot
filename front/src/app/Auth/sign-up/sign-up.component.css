@@ -1,0 +1,24 @@
+.sign-up {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  .sign-up .box {
+    width: 35%;
+    margin: auto;
+    padding: 15px 20px;
+  }
+  .sign-up .my-btn {
+    width: 80%;
+    margin: 10px auto;
+    text-align: center;
+    position: relative;
+    display: block;
+    padding: 11px;
+  }
+  .sign-up .my-btn.login {
+      background: #8325fffa;
+      color: #fff;
+  }
+  

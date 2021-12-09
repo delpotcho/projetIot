@@ -1,0 +1,39 @@
+<div class="sign-up">
+  <div class="box shadow">
+    <form #signUpForm="ngForm" (ngSubmit)="signUp(signUpForm)">
+      <h3 class="text-center">SignUp</h3>
+      <div class="form-group mb-3">
+        <label>username:</label>
+        <input
+          type="text"
+          name="username"
+          class="my-input"
+          ngModel
+          placeholder="Username"
+          minlength="3"
+          required
+        />
+      </div>
+      <div class="form-group mb-3">
+        <label>passowrd:</label>
+        <input
+          type="password"
+          name="password"
+          class="my-input"
+          placeholder="Passowrd"
+          ngModel
+          minlength="4"
+          required
+        />
+      </div>
+      <div class="action">
+        <button type="submit" class="my-btn" [disabled]="!signUpForm.valid">
+          create Account
+        </button>
+        <button class="my-btn login" type="button" [routerLink]="['/login']">
+          Login
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,68 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #6969699e;
+  min-height: 100vh;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+}
+.book-info {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  padding: 20px 40px;
+  box-shadow: -1px 3px 7px 0px rgb(0 0 0 / 18%);
+  width: 30%;
+  animation-name: slide-down;
+  animation-duration: 1s;
+  z-index: 10;
+}
+.book-info .title {
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.book-info .book-btn {
+  padding: 8px 35px;
+  margin-top: 12px;
+  text-transform: capitalize;
+  transition: 0.5s border-color ease-in-out;
+}
+.book-info .book-btn:hover {
+  border: 1px solid rgb(53 224 18 / 31%);
+}
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    top: -15%;
+  }
+  to {
+    opacity: 1;
+    top: 50%;
+  }
+}
+.book-form form label {
+  margin-top: 15px;
+  margin-bottom: 0;
+}
+.book-info form input {
+  margin-bottom: 1px;
+}
+.book-info input.ng-touched.ng-invalid {
+  border-color: rgb(255, 56, 56);
+}
+.book-info input.ng-touched.ng-valid {
+  border-color: rgb(20, 252, 70);
+}
+.book-info .msg-error {
+  font-size: 11px;
+  font-weight: 200;
+  color: #fd4545;
+  margin-bottom: 12px;
+}

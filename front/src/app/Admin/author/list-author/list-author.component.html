@@ -1,0 +1,23 @@
+<router-outlet></router-outlet>
+<div class="author-list">
+    <div class="header">
+        <h3 class="header-title">| List Author</h3>
+    </div>
+    <div class="author-list-header">
+        <button class="my-btn add-author" [routerLink]="['new']">
+          <i class="bx bx-plus"></i>New Author
+        </button>
+        <button (click)="changeOrder()" class="mb-2 my-btn order"><i class='bx bx-sort-alt-2'></i></button>
+      </div>
+    <div class="author-list-items">
+
+        <div *ngFor="let author of authors" class="author-list-item">
+            <p>{{author.username}}</p>
+            <card-author [author]="author"></card-author>
+        </div>
+        
+
+
+    </div>
+    
+</div>

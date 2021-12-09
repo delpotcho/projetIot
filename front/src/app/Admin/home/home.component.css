@@ -1,0 +1,14 @@
+/* .admin-home{
+    position: relative;
+    width: calc(100% - 70px);
+    left: 70px;
+    padding: 15px;
+    transition: .5s all ease-in-out;
+}
+.admin-home.active{
+    position: relative;
+    left: 270px;
+    width: calc(100% - 270px);
+    padding: 15px;
+    transition: .5s all ease-in-out;
+} */

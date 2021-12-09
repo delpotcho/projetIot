@@ -1,0 +1,48 @@
+.admin-book table.book-table {
+  background: #fbfbfb;
+}
+.book-list-header {
+  display: flex;
+  justify-content: space-between;
+}
+button.my-btn {
+  padding: 10px 20px;
+  transition: 0.3s transform ease;
+  background: #fff;
+}
+button.my-btn:hover {
+  transform: scale(1.04);
+}
+button.my-btn .bx-plus {
+  font-size: 20px;
+  position: relative;
+  top: 3px;
+  margin-right: 3px;
+}
+.adimn-book .book-list {
+  background: #fff;
+  width: 90%;
+  margin: 60px auto;
+}
+.adimn-book .form-book {
+  display: block;
+}
+.adimn-book .form-book.active {
+  display: block;
+}
+
+button.my-btn.btn-edit,
+button.my-btn.btn-delete {
+  padding: 5px 10px 1px;
+  font-size: 18px;
+}
+button.my-btn .bx-edit-alt {
+  color: #32d1db;
+}
+button.my-btn .bx-trash {
+  color: #ff2c2ca1;
+}
+button.my-btn.order {
+  padding: 9px 17px;
+  background: #ececec;
+}

@@ -1,0 +1,33 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+button.my-btn {
+  all: unset;
+  box-shadow: 2px 3px 6px 0px rgb(184 189 193 / 28%);
+  padding: 5 px 10 px;
+  border: 1 px solid #f7f7f7;
+  margin-bottom: 10 px;
+  cursor: pointer;
+  transform: scale(1.1);
+  transition: 0.4s transform ease-out;
+}
+.admin-dashboard {
+  min-height: 100vh;
+  height: 100%;
+  background: #5a99f70d;
+}
+.content {
+  position: relative;
+  width: calc(100% - 70px);
+  left: 70px;
+  padding: 15px;
+  transition: 0.5s all ease-in-out;
+}
+.content.active {
+  left: 270px;
+  width: calc(100% - 270px);
+  padding: 15px;
+  transition: 0.5s all ease-in-out;
+}
