@@ -8,10 +8,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import java.util.UUID;
 
-public interface CategoryService extends JpaRepository<Category, UUID> {
-    public List<Category> getAllUsers();
+public interface CategoryService {
+    public List<Category> getAllCategories();
 
-    public Category getCategoryById (UUID id);
+    public Category getCategoryById(UUID id);
 
     public void deleteCategory(Category category);
 

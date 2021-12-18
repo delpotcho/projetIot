@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-export interface BookElement {
+export interface ProductElement {
   id:number;
   code: string;
   title: string;
@@ -21,23 +21,23 @@ const server="http://localhost:8080";
 })
 export class BookService {
   constructor(private http:HttpClient) { }
-  books: BookElement[] = JSON.parse(localStorage.getItem('books'));
+  books: ProductElement[] = JSON.parse(localStorage.getItem('books'));
 
-  getBooks():Observable<BookElement[]>{
+  getBooks():Observable<ProductElement[]>{
     
-    return this.http.get<BookElement[]>(server+"/book/");
+    return this.http.get<ProductElement[]>(server+"/products/");
   }
-  getBookById(id:String):Observable<BookElement>{
-    return this.http.get<BookElement>(server+"/book/"+id);
+  getBookById(id:String):Observable<ProductElement>{
+    return this.http.get<ProductElement>(server+"/book/"+id);
   }
-  newBook(data:BookElement):Observable<BookElement>{
-     return this.http.post<BookElement>(server+"/book/new",data);
+  newBook(data:ProductElement):Observable<ProductElement>{
+     return this.http.post<ProductElement>(server+"/book/new",data);
   }
-  getBookByCode(code:string):BookElement{
+  getBookByCode(code:string):ProductElement{
     let book=this.books.find(b=>{return b.code==code});
     return book;
   }
-  editBook(newBook:BookElement):void{
+  editBook(newBook:ProductElement):void{
     let book=this.books.find(b=>{return b.code==newBook.code});
     book.authorUsername=newBook.authorUsername;
     book.description=newBook.description;
