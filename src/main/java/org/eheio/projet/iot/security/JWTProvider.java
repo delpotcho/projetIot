@@ -3,15 +3,10 @@ package org.eheio.projet.iot.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.eheio.projet.iot.model.Role;
-import org.eheio.projet.iot.service.implimentation.UserServiceImp;
+import org.eheio.projet.iot.service.implementation.UserServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 
 import java.time.Duration;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalUnit;
 import java.util.Base64;
 import java.util.Date;
 import java.util.Set;
@@ -20,8 +15,6 @@ import  io.jsonwebtoken.Jwts;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import javax.annotation.PostConstruct;
 
 public class JWTProvider {
 
