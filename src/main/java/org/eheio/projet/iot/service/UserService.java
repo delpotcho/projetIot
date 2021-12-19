@@ -9,7 +9,7 @@ public interface UserService {
     public List<User> getAllUsers();
 
     public User getUserById(UUID id);
-
+    User getUserByUserName(String username);
     public void deleteUser(User user);
 
     public void addUser(User user);

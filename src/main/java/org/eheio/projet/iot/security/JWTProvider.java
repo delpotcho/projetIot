@@ -3,6 +3,7 @@ package org.eheio.projet.iot.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.eheio.projet.iot.model.Role;
+import org.eheio.projet.iot.service.implimentation.MyUserDetailsService;
 import org.eheio.projet.iot.service.implimentation.UserServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,14 +21,16 @@ import  io.jsonwebtoken.Jwts;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 
+@Component
 public class JWTProvider {
 
 
     @Autowired
-    private UserServiceImp userService;
+    private MyUserDetailsService userService;
     private static final long DURATION = Duration.ofMinutes(5).toMillis(); //minute
 
     private static final   String SECRET_KEY=Base64.getEncoder().encodeToString("IOTAPP2022".getBytes());
@@ -48,7 +51,7 @@ public class JWTProvider {
         return claims;
     }
     public Authentication getAuthentication(String username){
-        UserDetails user=userService.getUserByUserName(username);
+        UserDetails user=userService.loadUserByUsername(username);
         return new UsernamePasswordAuthenticationToken(user.getUsername(),user.getPassword(),user.getAuthorities());
     }
 

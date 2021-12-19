@@ -20,11 +20,14 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 public class JWTFilter extends OncePerRequestFilter {
-
-    @Autowired
     private JWTProvider jwtProvider;
+
+    public JWTFilter(JWTProvider jwtProvider){
+        this.jwtProvider=jwtProvider;
+    }
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws TokenExpiredException, TokenNotValidException, ServletException, IOException {
+
 
         Cookie cookies[]= request.getCookies();
         String token=null;
@@ -52,10 +55,8 @@ public class JWTFilter extends OncePerRequestFilter {
                 throw new AuthenticationException("User Not Connected");
             }
             SecurityContextHolder.getContext().setAuthentication(authentication);
-            filterChain.doFilter(request,response);
-
-
         }
+        filterChain.doFilter(request,response);
 
     }
 }
