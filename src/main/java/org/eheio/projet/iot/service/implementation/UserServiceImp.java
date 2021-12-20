@@ -5,6 +5,7 @@ import org.eheio.projet.iot.model.User;
 import org.eheio.projet.iot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,16 +16,17 @@ public class UserServiceImp implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     @Override
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
-    public User getUserByUserName(String username) throws UsernameNotFoundException{
+    @Override
+    public User getUserByUserName(String username){
         User user= userRepository.getUserByUsername(username);
-        if(user==null){
-            throw new UsernameNotFoundException("User Not Found");
-        }
+
         return  user;
     }
     @Override
@@ -45,6 +47,7 @@ public class UserServiceImp implements UserService {
 
     @Override
     public void addUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 
