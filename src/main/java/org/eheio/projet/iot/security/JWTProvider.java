@@ -1,6 +1,7 @@
 package org.eheio.projet.iot.security;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.eheio.projet.iot.model.Role;
 import org.eheio.projet.iot.service.implimentation.MyUserDetailsService;
@@ -31,7 +32,7 @@ public class JWTProvider {
 
     @Autowired
     private MyUserDetailsService userService;
-    private static final long DURATION = Duration.ofMinutes(5).toMillis(); //minute
+    private static final long DURATION = Duration.ofMinutes(1).toMillis(); //minute
 
     private static final   String SECRET_KEY=Base64.getEncoder().encodeToString("IOTAPP2022".getBytes());
 
@@ -46,9 +47,12 @@ public class JWTProvider {
     }
 
     //get information from  token
-    public Claims getClaimsFromToken(String token){
-        Claims claims=Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
-        return claims;
+    public Claims getClaimsFromToken(String token) throws ExpiredJwtException{
+
+            Claims claims=Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
+            return claims;
+
+
     }
     public Authentication getAuthentication(String username){
         UserDetails user=userService.loadUserByUsername(username);

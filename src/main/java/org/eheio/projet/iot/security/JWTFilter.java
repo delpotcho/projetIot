@@ -5,7 +5,7 @@ import io.jsonwebtoken.ExpiredJwtException;
 import org.eheio.projet.iot.exception.AuthenticationException;
 import org.eheio.projet.iot.exception.TokenExpiredException;
 import org.eheio.projet.iot.exception.TokenNotValidException;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -16,8 +16,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.util.Date;
 
 public class JWTFilter extends OncePerRequestFilter {
     private JWTProvider jwtProvider;
@@ -38,25 +36,26 @@ public class JWTFilter extends OncePerRequestFilter {
         }
         if(token!=null){
             //get information from token
-            Claims claims= jwtProvider.getClaimsFromToken(token);
+            try{
+                Claims claims= jwtProvider.getClaimsFromToken(token);
+                String username=claims.getSubject();
+                Authentication authentication = jwtProvider.getAuthentication(username);
+                if(!authentication.isAuthenticated()){
+                    throw new AuthenticationException("User Not Connected");
+                }
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+
+            }catch (ExpiredJwtException e){
+                SecurityContextHolder.clearContext();
+            }
 
             //check validated token
-            if(claims==null){
-                SecurityContextHolder.clearContext();
-                throw new TokenNotValidException("Token Not Valide");
-            }
-            if(claims.getExpiration().before(new Date())){
-                throw new TokenExpiredException("Token Expired");
-            }
+
             // get Authentication object by  subject in token (username)
-            String username=claims.getSubject();
-            Authentication authentication = jwtProvider.getAuthentication(username);
-            if(!authentication.isAuthenticated()){
-                throw new AuthenticationException("User Not Connected");
-            }
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+
         }
         filterChain.doFilter(request,response);
 
     }
+
 }
