@@ -4,16 +4,15 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.eheio.projet.iot.model.Role;
+<<<<<<< HEAD
+import org.eheio.projet.iot.service.implementation.UserServiceImp;
+=======
 import org.eheio.projet.iot.service.implimentation.MyUserDetailsService;
 import org.eheio.projet.iot.service.implimentation.UserServiceImp;
+>>>>>>> 8d89653d32e24cf2b4b3dae150f0a0637c6c07f5
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 
 import java.time.Duration;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalUnit;
 import java.util.Base64;
 import java.util.Date;
 import java.util.Set;
@@ -24,9 +23,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+<<<<<<< HEAD
+=======
 import javax.annotation.PostConstruct;
 
 @Component
+>>>>>>> 8d89653d32e24cf2b4b3dae150f0a0637c6c07f5
 public class JWTProvider {
 
 
