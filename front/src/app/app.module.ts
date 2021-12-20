@@ -7,8 +7,8 @@ import { FormsModule } from '@angular/forms';
 import { DashboardComponent } from './Admin/dashboard/dashboard.component';
 import { SidebarComponent } from './Admin/dashboard/sidebar/sidebar.component';
 import { HomeComponent } from './Admin/home/home.component';
-import { BookComponent } from './Admin/product/product.component';
-import { FormBookComponent } from './Admin/product/form-product/form-product.component';
+import { ProductComponent } from './Admin/product/product.component';
+import { FormProductComponent } from './Admin/product/form-product/form-product.component';
 import { ListBookComponent } from './Admin/product/list-product/list-product.component';
 import { ItemBookComponent } from './Admin/product/list-product/item-product/item-product.component';
 import { LoginComponent } from './Auth/login/login.component';
@@ -24,8 +24,8 @@ import { CardAuthorComponent } from './Admin/author/card-author/card-author.comp
     DashboardComponent,
     SidebarComponent,
     HomeComponent,
-    BookComponent,
-    FormBookComponent,
+    ProductComponent,
+    FormProductComponent,
     ListBookComponent,
     ItemBookComponent, 
     LoginComponent,

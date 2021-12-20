@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { BookComponent } from './Admin/product/product.component';
-import { FormBookComponent } from './Admin/product/form-product/form-product.component';
+import { ProductComponent } from './Admin/product/product.component';
+import { FormProductComponent } from './Admin/product/form-product/form-product.component';
 import { ItemBookComponent } from './Admin/product/list-product/item-product/item-product.component';
 import { ListBookComponent } from './Admin/product/list-product/list-product.component';
 import { DashboardComponent } from './Admin/dashboard/dashboard.component';
@@ -12,7 +12,7 @@ import { SignUpComponent } from './Auth/sign-up/sign-up.component';
 const routes: Routes = [
   { path: 'admin', redirectTo: '/admin/dashboard', pathMatch: 'full' },
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
-  { path: 'signup', component: SignUpComponent, pathMatch: 'full' },
+  { path: 'register', component: SignUpComponent, pathMatch: 'full' },
 
   {
     path: 'admin',
@@ -25,7 +25,7 @@ const routes: Routes = [
       },
       {
         path: 'product',
-        component: BookComponent,
+        component: ProductComponent,
         children: [
           {
             path: '',
@@ -33,12 +33,12 @@ const routes: Routes = [
             children: [
               {
                 path: 'new',
-                component: FormBookComponent,
+                component: FormProductComponent,
                 pathMatch: 'full',
               },
               {
                 path: 'edit/:id',
-                component: FormBookComponent,
+                component: FormProductComponent,
                 pathMatch: 'full',
               },
             ],

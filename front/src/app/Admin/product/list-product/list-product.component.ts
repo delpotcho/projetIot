@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { BookElement, BookService } from '../service/book.service';
+import { ProductElement } from '../service/product.service';
+import { ProductService } from '../service/product.service';
 
 @Component({
   selector: 'admin-list-book',
@@ -8,20 +9,20 @@ import { BookElement, BookService } from '../service/book.service';
 })
 export class ListBookComponent implements OnInit {
   headers: String[] = ['code', 'title','authorUsername','description','price'];
-  books:BookElement[];
+  products:ProductElement[];
   order:number=1;
-  constructor(private bookService:BookService) { }
+  constructor(private productService:ProductService) { }
 
   ngOnInit(): void {
-    this.bookService.getBooks().subscribe(data=>{
+    this.productService.getProducts().subscribe(data=>{
       console.log(data);
-       this.books=data;
+       this.products=data;
     },error=>{
       console.log(error);
     });
   }
-  deleteBook(code:string){
-    this.bookService.delteBook(code);
+  deleteProduct(code:string){
+    this.productService.delteProduct(code);
   }
 
   changeOrder(){

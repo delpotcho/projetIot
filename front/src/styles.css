@@ -1,6 +1,42 @@
 /* You can add global styles to this file, and also import other style files */
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Heebo&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Heebo", sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+.shadow{
+  box-shadow: 2px 3px 6px 0px rgb(184 189 193 / 28%);
+}
+button.my-btn {
+  all: unset;
+  box-shadow: 2px 3px 6px 0px rgb(184 189 193 / 28%);
+  padding: 5px 10px;
+  border: 1px solid #f7f7f7;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+input.my-input {
+  display: block;
+  padding: 8px 14px;
+  margin: 2px 0 12px;
+  font-size: 15px;
+  background: #f9f9f9;
+  width: 100%;
+  outline: none;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid #93beff;
+  color: #6f6f71;
 }
