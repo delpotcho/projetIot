@@ -19,42 +19,30 @@ const server="http://localhost:8080";
 @Injectable({
   providedIn: 'root'
 })
-export class BookService {
+export class ProductService {
   constructor(private http:HttpClient) { }
-  books: ProductElement[] = JSON.parse(localStorage.getItem('books'));
+  
 
-  getBooks():Observable<ProductElement[]>{
+  getProducts():Observable<ProductElement[]>{
     
-    return this.http.get<ProductElement[]>(server+"/products/");
+    return this.http.get<ProductElement[]>(server+"/product/",{withCredentials:true});
   }
-  getBookById(id:String):Observable<ProductElement>{
-    return this.http.get<ProductElement>(server+"/book/"+id);
+  getProductById(id:String):Observable<ProductElement>{
+    return this.http.get<ProductElement>(server+"/product/"+id);
   }
-  newBook(data:ProductElement):Observable<ProductElement>{
-     return this.http.post<ProductElement>(server+"/book/new",data);
+  newProduct(data:ProductElement):Observable<ProductElement>{
+     return this.http.post<ProductElement>(server+"/product/new",data);
   }
-  getBookByCode(code:string):ProductElement{
-    let book=this.books.find(b=>{return b.code==code});
-    return book;
+  getProductByCode(code:string):ProductElement{
+    return null;
   }
-  editBook(newBook:ProductElement):void{
-    let book=this.books.find(b=>{return b.code==newBook.code});
-    book.authorUsername=newBook.authorUsername;
-    book.description=newBook.description;
-    book.title=newBook.title;
-    book.price=newBook.price;
-    this.saveBooksInLocalStorage();
+  editProduct(newBook:ProductElement):void{
+    
   }
-  delteBook(code:string){
-    this.books.forEach((b,index)=> {
-      if(b.code==code)
-        this.books.splice(index,1);
-    });
-    this.saveBooksInLocalStorage();
+  delteProduct(code:string){
+  
 
   }
 
-  saveBooksInLocalStorage(){
-    localStorage.setItem('books',JSON.stringify(this.books));
-  }
+  
 }

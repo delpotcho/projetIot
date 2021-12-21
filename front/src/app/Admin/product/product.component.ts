@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BookElement, BookService } from './service/book.service';
+import { ProductElement, ProductService } from './service/product.service';
 
 
 @Component({
@@ -8,13 +8,17 @@ import { BookElement, BookService } from './service/book.service';
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css'],
 })
-export class BookComponent implements OnInit {
+export class ProductComponent implements OnInit {
  
- 
-  constructor() {}
+  products:ProductElement[];
+  constructor(private productService:ProductService) {
+    this.products=[];
+  }
 
   ngOnInit(): void {
-   
+  this.productService.getProducts().subscribe(data=>{
+    this.products=data;
+  },err=>console.log(err));
   }
 
 

@@ -1,29 +1,29 @@
-<div class="overlay" (click)="returnToListBooks()"></div>
-<div class="book-info">
-    <h4 class="title" *ngIf="idBook!=null;else headerBookNewForm">Edit Book</h4>
-    <ng-template #headerBookNewForm>
-        <h4 class="text-center">New Book</h4>
+<div class="overlay" (click)="returnToListProducts()"></div>
+<div class="product-info">
+    <h4 class="title" *ngIf="idProduct!=null;else headerproductNewForm">Edit Product</h4>
+    <ng-template #headerproductNewForm>
+        <h4 class="text-center">New product</h4>
     </ng-template>
     <form  (ngSubmit)="onSubmit()">
         <div class="form-groupe">
             <label for="title">Title</label>
             <input type="text" class="my-input" id="title" formControlName="title" >
-            <div *ngIf="bookForm.get('title').invalid && (bookForm.get('title').dirty || bookForm.get('title').touched)">
+            <div *ngIf="productForm.get('title').invalid && (productForm.get('title').dirty || productForm.get('title').touched)">
                 <span class="msg-error">please enter a valid author name</span>  
               </div>
         </div>
         <div class="form-groupe">
             <label for="author">id Author</label>
             <input type="text" class="my-input"  id="author" formControlName="userId">
-            <div *ngIf="bookForm.get('userId').invalid && (bookForm.get('userId').dirty || bookForm.get('userId').touched)">
+            <div *ngIf="productForm.get('userId').invalid && (productForm.get('userId').dirty || productForm.get('userId').touched)">
               <span class="msg-error">please enter a valid author name</span>  
             </div>
         </div>
         <div class="form-groupe">
             <label for="description">Description</label>
             <input type="text" class="my-input"  id="description"  formControlName="description">
-            <small>words: {{bookForm.get('description').value}}</small>
-            <div *ngIf="bookForm.get('description').invalid && (bookForm.get('description').dirty || bookForm.get('description').touched) ">
+            <small>words: {{productForm.get('description').value}}</small>
+            <div *ngIf="productForm.get('description').invalid && (productForm.get('description').dirty || productForm.get('description').touched) ">
                 <span class="msg-error">description is required</span>  
             </div>
             
@@ -31,14 +31,14 @@
         <div class="form-groupe">
             <label for="price">Price</label>
             <input type="text" class="my-input"  id="price"  formControlName="price">
-            <div *ngIf="bookForm.get('price').invalid && (bookForm.get('price').dirty || bookForm.get('price').touched)">
+            <div *ngIf="productForm.get('price').invalid && (productForm.get('price').dirty || productForm.get('price').touched)">
                 <span class="msg-error">please enter price</span>  
             </div>
-            <small>Normal Price: {{bookForm.get('price').value}} | Price Pow(2): {{bookForm.get('price').value}} | Price Pow(3): {{bookForm.get('price').value}}</small>
+            <small>Normal Price: {{productForm.get('price').value}} | Price Pow(2): {{productForm.get('price').value}} | Price Pow(3): {{productForm.get('price').value}}</small>
         </div>
         
-        <button class="my-btn book-btn" type="submit" *ngIf="idBook!=null;else newBookLabel" [disabled]="!bookForm.valid"> edit</button>
-        <ng-template #newBookLabel><button class="my-btn book-btn" type="submit" [disabled]="!bookForm.valid">new</button></ng-template>
+        <button class="my-btn product-btn" type="submit" *ngIf="idProduct!=null;else newproductLabel" [disabled]="!productForm.valid"> edit</button>
+        <ng-template #newproductLabel><button class="my-btn product-btn" type="submit" [disabled]="!productForm.valid">new</button></ng-template>
 
     </form>
 </div>

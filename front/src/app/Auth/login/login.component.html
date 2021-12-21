@@ -1,18 +1,18 @@
 <div class="login">
     <div class="box shadow">
-        <form (ngSubmit)="login()">
+        <form #form="ngForm"(ngSubmit)="login(form)">
             <h3 class="text-center">LogIn</h3>
             <div class="form-group mb-3">
                 <label>username:</label>
-                <input type="text" class="my-input" placeholder="Username"/>
+                <input type="text" class="my-input" name="username" ngModel placeholder="Username"/>
             </div>
             <div class="form-group mb-3">
                 <label>passowrd:</label>
-                <input type="password" class="my-input" placeholder="Passowrd"/>
+                <input type="password" class="my-input" name="password" ngModel placeholder="Passowrd"/>
             </div>
             <div class="action">
                 <button type="submit" class="my-btn">Login</button>
-                <button class="my-btn sign-up" type="button"  [routerLink]="['/signup']" >Create Account</button>
+                <button class="my-btn sign-up" type="button"  [routerLink]="['/register']" >Create Account</button>
             </div>
             
         </form>

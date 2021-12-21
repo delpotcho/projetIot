@@ -18,8 +18,8 @@ public class Envirenment {
     private String name ;
     @ManyToMany
     private List<Category> categories;
-@OneToMany (mappedBy = "envirenment")
-private List<Node> nodes ;
+//@OneToMany (mappedBy = "envirenment")
+//private List<Node> nodes ;
 
 
 }
