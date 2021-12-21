@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/")
 public class ProductController {
-
     @RequestMapping("product")
     public String home(){
         return  "hello product";
