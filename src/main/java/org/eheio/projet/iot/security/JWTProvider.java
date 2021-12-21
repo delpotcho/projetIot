@@ -1,15 +1,9 @@
 package org.eheio.projet.iot.security;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import org.eheio.projet.iot.model.Role;
-<<<<<<< HEAD
 import org.eheio.projet.iot.service.implementation.UserServiceImp;
-=======
 import org.eheio.projet.iot.service.implimentation.MyUserDetailsService;
-import org.eheio.projet.iot.service.implimentation.UserServiceImp;
->>>>>>> 8d89653d32e24cf2b4b3dae150f0a0637c6c07f5
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.Duration;
@@ -17,18 +11,13 @@ import java.util.Base64;
 import java.util.Date;
 import java.util.Set;
 
-import  io.jsonwebtoken.Jwts;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-<<<<<<< HEAD
-=======
-import javax.annotation.PostConstruct;
-
 @Component
->>>>>>> 8d89653d32e24cf2b4b3dae150f0a0637c6c07f5
+
 public class JWTProvider {
 
 
@@ -49,10 +38,14 @@ public class JWTProvider {
     }
 
     //get information from  token
-    public Claims getClaimsFromToken(String token) throws ExpiredJwtException{
-
+    public Claims getClaimsFromToken(String token){
+        try{
             Claims claims=Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
             return claims;
+        }catch (JwtException e){
+            return  null;
+        }
+
 
 
     }

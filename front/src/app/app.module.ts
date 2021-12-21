@@ -17,6 +17,9 @@ import { AuthorComponent } from './Admin/author/author.component';
 import { ListAuthorComponent } from './Admin/author/list-author/list-author.component';
 import { FormAuthorComponent } from './Admin/author/form-author/form-author.component';
 import { CardAuthorComponent } from './Admin/author/card-author/card-author.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthGuardService } from './Auth/Service/auth-guard.service';
+import { ErrorInterceptor } from './Auth/Service/error-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -38,9 +41,12 @@ import { CardAuthorComponent } from './Admin/author/card-author/card-author.comp
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [{
+    provide:HTTP_INTERCEPTORS,useClass:ErrorInterceptor,multi:true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

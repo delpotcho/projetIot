@@ -8,6 +8,7 @@ import { DashboardComponent } from './Admin/dashboard/dashboard.component';
 import { HomeComponent } from './Admin/home/home.component';
 import { LoginComponent } from './Auth/login/login.component';
 import { SignUpComponent } from './Auth/sign-up/sign-up.component';
+import { AuthGuardService } from './Auth/Service/auth-guard.service';
 
 const routes: Routes = [
   { path: 'admin', redirectTo: '/admin/dashboard', pathMatch: 'full' },
@@ -17,11 +18,14 @@ const routes: Routes = [
   {
     path: 'admin',
     component: DashboardComponent,
+    canActivate:[AuthGuardService],
+  
     children: [
       {
         path: 'dashboard',
         component: HomeComponent,
         pathMatch: 'full',
+       
       },
       {
         path: 'product',

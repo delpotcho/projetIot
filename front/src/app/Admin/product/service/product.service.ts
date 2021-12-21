@@ -25,7 +25,7 @@ export class ProductService {
 
   getProducts():Observable<ProductElement[]>{
     
-    return this.http.get<ProductElement[]>(server+"/product/");
+    return this.http.get<ProductElement[]>(server+"/product/",{withCredentials:true});
   }
   getProductById(id:String):Observable<ProductElement>{
     return this.http.get<ProductElement>(server+"/product/"+id);
