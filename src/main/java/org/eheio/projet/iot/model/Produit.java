@@ -10,7 +10,7 @@ import java.util.UUID;
 @Entity
 @Data @NoArgsConstructor @AllArgsConstructor
 public class Produit {@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
+@GeneratedValue(strategy = GenerationType.AUTO)
     private UUID ID ;
     private String name ;
     private Float tempMax;

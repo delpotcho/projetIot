@@ -4,22 +4,23 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
+
 @Entity
-@Data @NoArgsConstructor @AllArgsConstructor
-public class Envirenment {
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Node {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID ID;
-    private String name ;
-    @ManyToMany
-    private List<Category> categories;
-@OneToMany (mappedBy = "envirenment")
-private List<Node> nodes ;
+    private  Float temperature ;
+    private Float humidity;
+    private Date date;
+    @ManyToOne
+    private Envirenment envirenment;
 
 
 }

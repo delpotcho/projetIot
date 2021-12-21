@@ -11,7 +11,7 @@ import java.util.UUID;
 @Data @NoArgsConstructor @AllArgsConstructor
 public class Category {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID ID ;
     private String type ;
     @ManyToMany(mappedBy = "categories")

@@ -10,5 +10,6 @@ public class ProjetIotApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ProjetIotApplication.class, args);
+
     }
 }

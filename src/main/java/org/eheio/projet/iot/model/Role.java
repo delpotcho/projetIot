@@ -12,7 +12,7 @@ import java.util.UUID;
 @Data @NoArgsConstructor @AllArgsConstructor
 public class Role implements GrantedAuthority {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID ID ;
     private String name ;
     @ManyToMany(mappedBy = "roles")

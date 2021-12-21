@@ -1,12 +1,10 @@
 package org.eheio.projet.iot.dao;
 
-import org.eheio.projet.iot.model.Envirenment;
+import org.eheio.projet.iot.model.Node;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
 @Repository
-public interface EnvirenmentRepository extends JpaRepository<Envirenment,UUID>{
-
-
+public interface NodeRepsitory extends JpaRepository<Node,UUID>{
 }
