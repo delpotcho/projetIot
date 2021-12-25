@@ -1,0 +1,28 @@
+.box {
+  border-radius: 12px;
+  border: 1px solid #fff;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+}
+.box:hover {
+  transform: scale(1.05);
+}
+.nodes {
+  display: flex;
+  justify-content: space-around;
+}
+.nodes .node {
+  display: inline-block;
+  margin-bottom: 10px;
+}
+.nodes .node span {
+  font-size: 12px;
+}
+.nodes .node h6 {
+  font-size: 14px;
+  font-weight: bold;
+  color: #4ac730;
+}
+.nodes .node h6.danger {
+  color: #e63939;
+}

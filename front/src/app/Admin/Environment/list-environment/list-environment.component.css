@@ -1,0 +1,16 @@
+.environments {
+  padding: 100px 0;
+}
+.environments button {
+  padding: 10px;
+  transition: all 0.3s ease-in-out;
+}
+.environments button:hover {
+  transform: scale(1.08);
+}
+.environments button.my-btn .bx-plus {
+  font-size: 20px;
+  position: relative;
+  top: 3px;
+  margin-right: 3px;
+}

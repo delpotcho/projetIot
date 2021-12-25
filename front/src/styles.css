@@ -16,8 +16,16 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
-.shadow{
+.shadow {
   box-shadow: 2px 3px 6px 0px rgb(184 189 193 / 28%);
+}
+a {
+  color: #343a40;
+  text-decoration: none;
+}
+a:hover {
+  color: #191a1b;
+
 }
 button.my-btn {
   all: unset;

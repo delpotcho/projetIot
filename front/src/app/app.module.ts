@@ -10,7 +10,7 @@ import { HomeComponent } from './Admin/home/home.component';
 import { ProductComponent } from './Admin/product/product.component';
 import { FormProductComponent } from './Admin/product/form-product/form-product.component';
 import { ListBookComponent } from './Admin/product/list-product/list-product.component';
-import { ItemBookComponent } from './Admin/product/list-product/item-product/item-product.component';
+import { ItemProductComponent } from './Admin/product/list-product/item-product/item-product.component';
 import { LoginComponent } from './Auth/login/login.component';
 import { SignUpComponent } from './Auth/sign-up/sign-up.component';
 import { AuthorComponent } from './Admin/author/author.component';
@@ -23,6 +23,7 @@ import { ErrorInterceptor } from './Auth/Service/error-interceptor.service';
 import { EnvironmentComponent } from './Admin/Environment/environment/environment.component';
 import { ListEnvironmentComponent } from './Admin/Environment/list-environment/list-environment.component';
 import { ItemEnvironmentComponent } from './Admin/Environment/list-environment/item-environment/item-environment.component';
+import { EnvironmentDetailComponent } from './Admin/Environment/environment-detail/environment-detail.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import { ItemEnvironmentComponent } from './Admin/Environment/list-environment/i
     ProductComponent,
     FormProductComponent,
     ListBookComponent,
-    ItemBookComponent, 
+    ItemProductComponent, 
     LoginComponent,
     SignUpComponent,
     AuthorComponent,
@@ -43,6 +44,7 @@ import { ItemEnvironmentComponent } from './Admin/Environment/list-environment/i
     EnvironmentComponent,
     ListEnvironmentComponent,
     ItemEnvironmentComponent,
+    EnvironmentDetailComponent,
   ],
   imports: [
     BrowserModule,

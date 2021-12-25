@@ -6,7 +6,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './item-product.component.html',
   styleUrls: ['./item-product.component.css']
 })
-export class ItemBookComponent implements OnInit {
+export class ItemProductComponent implements OnInit {
 
   idBook:String;
   constructor(private activedRoute:ActivatedRoute ) { }

@@ -2,13 +2,18 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ProductComponent } from './Admin/product/product.component';
 import { FormProductComponent } from './Admin/product/form-product/form-product.component';
-import { ItemBookComponent } from './Admin/product/list-product/item-product/item-product.component';
+import { ItemProductComponent } from './Admin/product/list-product/item-product/item-product.component';
 import { ListBookComponent } from './Admin/product/list-product/list-product.component';
 import { DashboardComponent } from './Admin/dashboard/dashboard.component';
 import { HomeComponent } from './Admin/home/home.component';
 import { LoginComponent } from './Auth/login/login.component';
 import { SignUpComponent } from './Auth/sign-up/sign-up.component';
 import { AuthGuardService } from './Auth/Service/auth-guard.service';
+import { EnvironmentComponent } from './Admin/Environment/environment/environment.component';
+import { componentFactoryName } from '@angular/compiler';
+import { environment } from 'src/environments/environment';
+import { ListEnvironmentComponent } from './Admin/Environment/list-environment/list-environment.component';
+import { EnvironmentDetailComponent } from './Admin/Environment/environment-detail/environment-detail.component';
 
 const routes: Routes = [
   { path: 'admin', redirectTo: '/admin/dashboard', pathMatch: 'full' },
@@ -18,7 +23,7 @@ const routes: Routes = [
   {
     path: 'admin',
     component: DashboardComponent,
-    canActivate:[AuthGuardService],
+   // canActivate:[AuthGuardService],
   
     children: [
       {
@@ -50,11 +55,27 @@ const routes: Routes = [
 
           {
             path: ':id',
-            component: ItemBookComponent,
+            component: ItemProductComponent,
             pathMatch: 'full',
           },
         ],
       },
+      {
+        path:'environment',
+        component:EnvironmentComponent,
+        children:[
+          {
+            path: '',
+            component: ListEnvironmentComponent,
+            pathMatch: 'full',
+          },
+          {
+            path: ':id',
+            component: EnvironmentDetailComponent,
+            pathMatch: 'full',
+          },
+        ]
+      }
 
     ],
   },
