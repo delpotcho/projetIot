@@ -8,13 +8,13 @@ import java.util.List;
 import java.util.UUID;
 
 public interface NodeService {
-    public List<NodeDto> getAllNodes();
+    public List<Node> getAllNodes();
 
-    public NodeDto getUsNodeById(UUID id);
+    public Node getUsNodeById(UUID id);
 
-    public void deleteNode(NodeDto node);
+    public void deleteNode(Node node);
 
-    public void addNode(NodeDto node);
+    public void addNode(Node node);
 
-    public void updateNode(NodeDto node);
+    public Node updateNode(Node node);
 }

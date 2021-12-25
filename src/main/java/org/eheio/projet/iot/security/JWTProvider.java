@@ -1,13 +1,7 @@
 package org.eheio.projet.iot.security;
-
 import io.jsonwebtoken.*;
 import org.eheio.projet.iot.model.Role;
-<<<<<<< HEAD
-
-=======
-import org.eheio.projet.iot.service.implementation.UserServiceImp;
 import org.eheio.projet.iot.service.implimentation.MyUserDetailsService;
->>>>>>> 37843754ee18ea4c1bae3ad68934a4b81e20f637
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.Duration;
@@ -21,26 +15,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 @Component
-<<<<<<< HEAD
-=======
-
->>>>>>> 37843754ee18ea4c1bae3ad68934a4b81e20f637
 public class JWTProvider {
-
-
-    @Autowired
-<<<<<<< HEAD
-    private org.eheio.projet.iot.service.implimentation.MyUserDetailsService userService;
     private static final long DURATION = Duration.ofMinutes(5).toMillis(); //minute
-=======
+    @Autowired
     private MyUserDetailsService userService;
-    private static final long DURATION = Duration.ofMinutes(1).toMillis(); //minute
->>>>>>> 37843754ee18ea4c1bae3ad68934a4b81e20f637
-
     private static final   String SECRET_KEY=Base64.getEncoder().encodeToString("IOTAPP2022".getBytes());
-
-
-
     public String generateToken(String username, Set<Role> roles){
         Claims claims= Jwts.claims().setSubject(username);
         claims.put("role",roles);

@@ -14,31 +14,31 @@ public class NodeServiceImp implements NodeService {
     @Autowired
    private  NodeRepsitory nodeRepsitory;
     @Override
-    public List<NodeDto> getAllNodes() {
+    public List<Node> getAllNodes() {
         return nodeRepsitory.findAll();
     }
 
     @Override
-    public NodeDto getUsNodeById(UUID id) {
+    public Node getUsNodeById(UUID id) {
         return nodeRepsitory.getById(id);
     }
 
     @Override
-    public void deleteNode(NodeDto node) {
+    public void deleteNode(Node node) {
         nodeRepsitory.delete(node);
 
     }
 
     @Override
-    public void addNode(NodeDto node) {
+    public void addNode(Node node) {
         nodeRepsitory.save(node);
 
 
     }
 
     @Override
-    public void updateNode(NodeDto node) {
-        nodeRepsitory.save(node);
+    public Node updateNode(Node node) {
+       return nodeRepsitory.save(node);
 
     }
 }
