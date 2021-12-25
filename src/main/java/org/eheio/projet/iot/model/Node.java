@@ -16,10 +16,14 @@ public class Node {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID ID;
-    private  Float temperature ;
+    private Float temperature;
     private Float humidity;
     private Date date;
     @ManyToOne
     private Envirenment envirenment;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> f53787e89dee26ff9a1bfee98176a0355e32f086
 }

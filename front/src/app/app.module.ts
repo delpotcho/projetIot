@@ -20,6 +20,9 @@ import { CardAuthorComponent } from './Admin/author/card-author/card-author.comp
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthGuardService } from './Auth/Service/auth-guard.service';
 import { ErrorInterceptor } from './Auth/Service/error-interceptor.service';
+import { EnvironmentComponent } from './Admin/Environment/environment/environment.component';
+import { ListEnvironmentComponent } from './Admin/Environment/list-environment/list-environment.component';
+import { ItemEnvironmentComponent } from './Admin/Environment/list-environment/item-environment/item-environment.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +40,9 @@ import { ErrorInterceptor } from './Auth/Service/error-interceptor.service';
     ListAuthorComponent,
     FormAuthorComponent,
     CardAuthorComponent,
+    EnvironmentComponent,
+    ListEnvironmentComponent,
+    ItemEnvironmentComponent,
   ],
   imports: [
     BrowserModule,

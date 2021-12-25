@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/")
 public class ProductController {
+<<<<<<< HEAD
     @Autowired
     private ProduitService produitService;
     ModelMapper modelMapper;
@@ -67,5 +68,10 @@ public class ProductController {
     public ResponseEntity<?> updateNode(@PathVariable("id") UUID produitId) {
 
         return ResponseEntity.ok(HttpStatus.OK);
+=======
+    @RequestMapping("product")
+    public String home(){
+        return  "hello product";
+>>>>>>> f53787e89dee26ff9a1bfee98176a0355e32f086
     }
 }
