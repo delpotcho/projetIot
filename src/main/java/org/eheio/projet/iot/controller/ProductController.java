@@ -1,8 +1,6 @@
 package org.eheio.projet.iot.controller;
 
-import org.eheio.projet.iot.dto.request.NodeDto;
-import org.eheio.projet.iot.dto.response.ProduitDto;
-import org.eheio.projet.iot.model.Node;
+import org.eheio.projet.iot.dto.response.ProductDto;
 import org.eheio.projet.iot.model.Produit;
 import org.eheio.projet.iot.service.ProduitService;
 import org.modelmapper.ModelMapper;
@@ -17,24 +15,16 @@ import java.util.stream.Collectors;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/")
+@RequestMapping("/product")
 public class ProductController {
-<<<<<<< HEAD
     @Autowired
     private ProduitService produitService;
     ModelMapper modelMapper;
 
-    @PostMapping("product")
-    public ResponseEntity<?> addProduct(@PathVariable("product") ProduitDto produitDto) {
-
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @PostMapping("product")
-    public ResponseEntity<?> saveNode(@RequestParam("product") ProduitDto productDto) {
+    @PostMapping("/new")
+    public ResponseEntity<?> addProduct(@RequestParam("product") ProductDto productDto) {
 
         if (productDto != null) {
-
             Produit produit = modelMapper.map(productDto, Produit.class);
             produitService.addProduit(produit);
            return ResponseEntity.ok().body("add well");
@@ -44,34 +34,28 @@ public class ProductController {
 
     }
 
-    @GetMapping("produit")
-    public List<ProduitDto> getAllProduit() {
-        List<Produit> produits = produitService.getAllProduits();
-        List<ProduitDto> produitDtos= produits.stream().map((p) -> modelMapper.map(p, ProduitDto.class)).collect(Collectors.toList());
-        return produitDtos;
+    @GetMapping("/")
+    public List<ProductDto> getAllProduct() {
+        List<Produit> products = produitService.getAllProduits();
+        List<ProductDto> productsDto= products.stream().map((p) -> modelMapper.map(p, ProductDto.class)).collect(Collectors.toList());
+        return productsDto;
     }
 
-    @GetMapping("produit/{produitId}")
-    public ProduitDto getProduitById(@PathVariable("produitId") UUID nodeIde) {
-        Produit produit = produitService.getProduitById(nodeIde);
-        return modelMapper.map(produit, ProduitDto.class);
+    @GetMapping("product/{productId}")
+    public ProductDto getProductById(@PathVariable("productId") UUID productId) {
+        Produit produit = produitService.getProduitById(productId);
+        return modelMapper.map(produit, ProductDto.class);
     }
 
-    @DeleteMapping("produit")
-    public ResponseEntity<?> deletePrudact(@RequestParam("node") ProduitDto produitDto) {
-        Produit produit = modelMapper.map(produitDto, Produit.class);
+    @DeleteMapping("product/{id}")
+    public ResponseEntity<?> deleteProduct(@RequestParam("id") UUID productId) {
+        Produit produit = produitService.getProduitById(productId);
         produitService.deleteProduit(produit);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping("produit/{id}")
-    public ResponseEntity<?> updateNode(@PathVariable("id") UUID produitId) {
-
+    @PutMapping("product/{id}")
+    public ResponseEntity<?> updateNode(@PathVariable("id") UUID productId) {
         return ResponseEntity.ok(HttpStatus.OK);
-=======
-    @RequestMapping("product")
-    public String home(){
-        return  "hello product";
->>>>>>> f53787e89dee26ff9a1bfee98176a0355e32f086
     }
 }

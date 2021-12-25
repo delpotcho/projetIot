@@ -21,9 +21,4 @@ public class Node {
     private Date date;
     @ManyToOne
     private Envirenment envirenment;
-
-<<<<<<< HEAD
-=======
-
->>>>>>> f53787e89dee26ff9a1bfee98176a0355e32f086
 }
