@@ -16,8 +16,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class JWTProvider {
-    @Autowired
-    private static final long DURATION = Duration.ofMinutes(5).toMillis(); //minute
+
+    private static final long DURATION = Duration.ofMinutes(5).toMillis(); //min
+    @Autowired// ute
     private MyUserDetailsService userService;
     private static final   String SECRET_KEY=Base64.getEncoder().encodeToString("IOTAPP2022".getBytes());
     public String generateToken(String username, Set<Role> roles){

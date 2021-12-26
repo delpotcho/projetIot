@@ -39,11 +39,14 @@ public class JWTFilter extends OncePerRequestFilter {
             System.out.println(request.getRequestURI());
             Cookie cookies[] = request.getCookies();
             String token = null;
-            for (Cookie cookie : cookies) {
-                if ("auth".equals(cookie.getName())) {
-                    token = cookie.getValue();
+            if(cookies!=null){
+                for (Cookie cookie : cookies) {
+                    if ("auth".equals(cookie.getName())) {
+                        token = cookie.getValue();
+                    }
                 }
             }
+
             if (token != null) {
                 //get information from token
                 Claims claims = jwtProvider.getClaimsFromToken(token);

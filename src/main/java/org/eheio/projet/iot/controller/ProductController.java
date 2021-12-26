@@ -1,6 +1,7 @@
 package org.eheio.projet.iot.controller;
 
 import org.eheio.projet.iot.dto.response.ProductDto;
+import org.eheio.projet.iot.dto.response.ResponseMessage;
 import org.eheio.projet.iot.model.Produit;
 import org.eheio.projet.iot.service.ProduitService;
 import org.modelmapper.ModelMapper;
@@ -9,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -21,6 +23,14 @@ public class ProductController {
     private ProduitService produitService;
     ModelMapper modelMapper;
 
+
+    //test
+//    @GetMapping("/date")
+//    public ResponseEntity<ResponseMessage> getDateNow(){
+//        ResponseMessage msg=  new ResponseMessage(LocalDateTime.now().toString(),HttpStatus.OK);
+//
+//        return  ResponseEntity.ok().body(msg);
+//    }
     @PostMapping("/new")
     public ResponseEntity<?> addProduct(@RequestParam("product") ProductDto productDto) {
 
