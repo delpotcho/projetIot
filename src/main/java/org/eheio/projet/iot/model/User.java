@@ -16,9 +16,7 @@ import java.util.UUID;
 @Data @AllArgsConstructor @Builder @NoArgsConstructor
 public class User implements UserDetails {
     @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(name = "id", columnDefinition = "VARCHAR(255)")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String username;
     private String email;

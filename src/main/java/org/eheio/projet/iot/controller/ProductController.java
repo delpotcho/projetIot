@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -21,7 +22,8 @@ import java.util.stream.Collectors;
 public class ProductController {
     @Autowired
     private ProduitService produitService;
-    ModelMapper modelMapper;
+    @Autowired
+    private ModelMapper modelMapper;
 
 
     //test

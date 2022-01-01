@@ -26,3 +26,19 @@
 .nodes .node h6.danger {
   color: #e63939;
 }
+.data-env {
+  font-weight: bold;
+  font-size: 13px;
+}
+.data-env p {
+  margin: 0;
+}
+.data-env p:nth-child(2) {
+  margin-bottom: 12px;
+}
+.data-env .bx-cloud-light-rain {
+  color: #098cc8;
+}
+.data-env .bxs-hot {
+  color: #e63939;
+}

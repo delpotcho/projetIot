@@ -1,0 +1,130 @@
+<div class="overlay" (click)="returnToListEnvironment()"></div>
+<div class="environment-info">
+  <h4
+    class="title"
+    *ngIf="idEnvironment != null; else headerEnvironmentNewForm"
+  >
+    Edit Environment
+  </h4>
+  <ng-template #headerEnvironmentNewForm>
+    <h4 class="text-center">New Environment</h4>
+  </ng-template>
+  <form (ngSubmit)="onSubmit()" [formGroup]="environmentForm">
+    <div class="form-groupe">
+      <label for="name">name</label>
+      <input type="text" class="my-input" id="name" formControlName="name" />
+      <div
+        *ngIf="
+          environmentForm.get('name').invalid &&
+          (environmentForm.get('name').dirty ||
+            environmentForm.get('name').touched)
+        "
+      >
+        <span class="msg-error">please enter a valid name</span>
+      </div>
+    </div>
+    <div class="form-groupe">
+      <label for="min-temp">Min Temperature</label>
+      <input
+        type="text"
+        class="my-input"
+        id="min-temp"
+        formControlName="minTemperature"
+      />
+      <div
+        *ngIf="
+          environmentForm.get('minTemperature').invalid &&
+          (environmentForm.get('minTemperature').dirty ||
+            environmentForm.get('minTemperature').touched)
+        "
+      >
+        <span class="msg-error">please enter a valid min Temperateur</span>
+      </div>
+    </div>
+    <div class="form-groupe">
+      <label for="max-temp">Max Temperature</label>
+      <input
+        type="text"
+        class="my-input"
+        id="max-temp"
+        formControlName="maxTemperature"
+      />
+      <div
+        *ngIf="
+          environmentForm.get('maxTemperature').invalid &&
+          (environmentForm.get('maxTemperature').dirty ||
+            environmentForm.get('maxTemperature').touched)
+        "
+      >
+        <span class="msg-error">max Temperateur is required</span>
+      </div>
+    </div>
+    <div class="form-groupe">
+      <label for="max-temp">Max Humidity</label>
+      <input
+        type="text"
+        class="my-input"
+        id="max-humidity"
+        formControlName="maxHumidity"
+      />
+      <div
+        *ngIf="
+          environmentForm.get('maxHumidity').invalid &&
+          (environmentForm.get('maxHumidity').dirty ||
+            environmentForm.get('maxHumidity').touched)
+        "
+      >
+        <span class="msg-error">max Humidity is required</span>
+      </div>
+    </div>
+    <div class="form-groupe">
+      <label for="max-temp">Min Humidity</label>
+      <input
+        type="text"
+        class="my-input"
+        id="min-humidity"
+        formControlName="minHumidity"
+      />
+      <div
+        *ngIf="
+          environmentForm.get('minHumidity').invalid &&
+          (environmentForm.get('minHumidity').dirty ||
+            environmentForm.get('minHumidity').touched)
+        "
+      >
+        <span class="msg-error">min Humidity is required</span>
+      </div>
+    </div>
+    <div class="form-groupe">
+      <label for="nodes"><i class="fas fa-node-js"></i>Nodes</label>
+      <input type="text" class="my-input" id="nodes" formControlName="nodes" />
+      <div
+        *ngIf="
+          environmentForm.get('nodes').invalid &&
+          (environmentForm.get('nodes').dirty ||
+            environmentForm.get('nodes').touched)
+        "
+      >
+        <span class="msg-error">nodes is required</span>
+      </div>
+    </div>
+
+    <button
+      class="my-btn environment-btn"
+      type="submit"
+      *ngIf="idEnvironment != null; else newEnvironmentLabel"
+      [disabled]="!environmentForm.valid"
+    >
+      edit
+    </button>
+    <ng-template #newEnvironmentLabel
+      ><button
+        class="my-btn environment-btn"
+        type="submit"
+        [disabled]="!environmentForm.valid"
+      >
+        new
+      </button></ng-template
+    >
+  </form>
+</div>

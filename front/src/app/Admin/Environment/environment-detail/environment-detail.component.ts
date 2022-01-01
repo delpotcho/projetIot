@@ -41,6 +41,7 @@ export class EnvironmentDetailComponent implements OnInit {
           '23',
           '00',
         ],
+
         datasets: [
           {
             label: 'Temp',
@@ -50,6 +51,16 @@ export class EnvironmentDetailComponent implements OnInit {
             tension: 0.1,
           },
         ],
+      },
+      options: {
+        scales: {
+          x: {
+            ticks: {
+              autoSkip: true,
+              maxTicksLimit: 20,
+            },
+          },
+        },
       },
     });
     const chartHumidity = new Chart('chart-humidity', {
@@ -90,18 +101,21 @@ export class EnvironmentDetailComponent implements OnInit {
           },
         ],
       },
+      options: {
+        scales: {
+          x: {
+            ticks: {
+              autoSkip: true,
+              maxTicksLimit: 10,
+              stepSize: 2,
+            },
+          },
+        },
+      },
     });
 
     //get data evrey 10s
     const inter = interval(10000);
-    const data = inter.subscribe(() => {
-      this.envService.getDateNow().subscribe(
-        (data) => console.log(data),
-        (err) => {
-          console.log(err);
-          data.unsubscribe();
-        }
-      );
-    });
+    const data = inter.subscribe(() => {});
   }
 }

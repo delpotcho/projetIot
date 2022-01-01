@@ -17,7 +17,7 @@ public class Category {
     @ManyToMany(mappedBy = "categories")
     private List<Produit> produits;
     @ManyToMany(mappedBy = "categories")
-    private List<Envirenment>envirenments;
+    private List<Environment> environments;
 
 
 

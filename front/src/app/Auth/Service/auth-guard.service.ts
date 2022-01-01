@@ -7,11 +7,8 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class AuthGuardService implements CanActivate ,CanActivateChild{
-
   constructor(private authService:AuthService,private router:Router) { }
   canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean |  Promise<boolean>{
-    
-    
     if(!this.authService.isAuthenticated()){
       return this.router.navigateByUrl("/login");
     }

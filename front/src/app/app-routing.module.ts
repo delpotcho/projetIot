@@ -14,6 +14,7 @@ import { componentFactoryName } from '@angular/compiler';
 import { environment } from 'src/environments/environment';
 import { ListEnvironmentComponent } from './Admin/Environment/list-environment/list-environment.component';
 import { EnvironmentDetailComponent } from './Admin/Environment/environment-detail/environment-detail.component';
+import { EnvironmentFormComponent } from './Admin/Environment/environment-form/environment-form.component';
 
 const routes: Routes = [
   { path: 'admin', redirectTo: '/admin/dashboard', pathMatch: 'full' },
@@ -23,14 +24,13 @@ const routes: Routes = [
   {
     path: 'admin',
     component: DashboardComponent,
-   // canActivate:[AuthGuardService],
-  
+    // canActivate:[AuthGuardService],
+
     children: [
       {
         path: 'dashboard',
         component: HomeComponent,
         pathMatch: 'full',
-       
       },
       {
         path: 'product',
@@ -61,22 +61,26 @@ const routes: Routes = [
         ],
       },
       {
-        path:'environment',
-        component:EnvironmentComponent,
-        children:[
+        path: 'environment',
+        component: EnvironmentComponent,
+        children: [
           {
             path: '',
             component: ListEnvironmentComponent,
-            pathMatch: 'full',
+            children: [
+              {
+                path: 'new',
+                component: EnvironmentFormComponent,
+                pathMatch: 'full',
+              },
+            ],
           },
           {
             path: ':id',
             component: EnvironmentDetailComponent,
-            pathMatch: 'full',
           },
-        ]
-      }
-
+        ],
+      },
     ],
   },
 ];

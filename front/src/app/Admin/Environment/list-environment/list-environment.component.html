@@ -1,22 +1,14 @@
+<router-outlet></router-outlet>
 <div class="container environments">
   <h1 class="text-center mb-4 text-uppercase">Environment List</h1>
   <div class="new-env mb-3">
-    <button class="my-btn shadow">
+    <button class="my-btn shadow" routerLink="new">
       <i class="bx bx-plus"></i>New Environment
     </button>
   </div>
   <div class="row">
-    <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
-      <app-item-environment></app-item-environment>
-    </div>
-    <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
-      <app-item-environment></app-item-environment>
-    </div>
-    <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
-      <app-item-environment></app-item-environment>
-    </div>
-    <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
-      <app-item-environment></app-item-environment>
+    <div *ngFor="let env of environments" class="col-sm-6 col-md-4 col-lg-3 mb-3">
+      <app-item-environment [environment]="env"></app-item-environment>
     </div>
   </div>
 </div>

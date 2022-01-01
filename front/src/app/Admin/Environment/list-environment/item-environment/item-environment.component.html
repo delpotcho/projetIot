@@ -1,6 +1,19 @@
 <div class="box shadow p-3">
   <a routerLink="1">
-    <h5 class="node-name mb-3">Env 1</h5>
+    <div class="d-flex justify-content-between">
+      <h5 class="title-env mb-3">{{ environment.name }}</h5>
+      <div class="data-env">
+        <p>
+          <i class="bx bx-cloud-light-rain"></i> {{ environment.minHumidity }} % 
+          - {{ environment.maxHumidity }} %
+        </p>
+        <p>
+          <i class="bx bxs-hot"></i> {{ environment.minTemperature }} C° - 
+          {{ environment.maxTemperature }} C°
+        </p>
+      </div>
+    </div>
+
     <div class="nodes">
       <div class="node shadow d-inline-block px-2 mr-2">
         <span class="node-name">Node 1</span>

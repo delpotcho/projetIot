@@ -8,7 +8,7 @@
   width: 100%;
   z-index: 1;
 }
-.book-info {
+.product-info {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -21,20 +21,20 @@
   animation-duration: 1s;
   z-index: 10;
 }
-.book-info .title {
+.product-info .title {
   text-align: center;
   text-transform: uppercase;
   margin-bottom: 15px;
   font-weight: 600;
 }
 
-.book-info .book-btn {
+.product-info .product-btn {
   padding: 8px 35px;
   margin-top: 12px;
   text-transform: capitalize;
   transition: 0.5s border-color ease-in-out;
 }
-.book-info .book-btn:hover {
+.product-info .product-btn:hover {
   border: 1px solid rgb(53 224 18 / 31%);
 }
 @keyframes slide-down {
@@ -47,20 +47,20 @@
     top: 50%;
   }
 }
-.book-form form label {
+.product-form form label {
   margin-top: 15px;
   margin-bottom: 0;
 }
-.book-info form input {
+.product-info form input {
   margin-bottom: 1px;
 }
-.book-info input.ng-touched.ng-invalid {
+.product-info input.ng-touched.ng-invalid {
   border-color: rgb(255, 56, 56);
 }
-.book-info input.ng-touched.ng-valid {
+.product-info input.ng-touched.ng-valid {
   border-color: rgb(20, 252, 70);
 }
-.book-info .msg-error {
+.product-info .msg-error {
   font-size: 11px;
   font-weight: 200;
   color: #fd4545;

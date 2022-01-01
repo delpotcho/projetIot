@@ -24,6 +24,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class JWTFilter extends OncePerRequestFilter {
     private JWTProvider jwtProvider;
     private final ObjectMapper mapper = new ObjectMapper();
@@ -45,8 +46,8 @@ public class JWTFilter extends OncePerRequestFilter {
                         token = cookie.getValue();
                     }
                 }
-            }
 
+            }
             if (token != null) {
                 //get information from token
                 Claims claims = jwtProvider.getClaimsFromToken(token);
@@ -64,7 +65,6 @@ public class JWTFilter extends OncePerRequestFilter {
                     SecurityContextHolder.clearContext();
                     response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                     response.getOutputStream().write("token expired".getBytes());
-
                     return;
                 }
             }

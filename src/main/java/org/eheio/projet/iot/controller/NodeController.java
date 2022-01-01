@@ -16,13 +16,30 @@ import java.util.stream.Collectors;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/")
+@RequestMapping("/node")
 public class NodeController {
     @Autowired
     private NodeService nodeService;
-
+    @Autowired
     ModelMapper modelMapper ;
-    @PostMapping("node")
+    /************* GET  DATA By [Hour,Day,Weekly,Monthly]**********************/
+    /***!!!! change later !!!! **/
+    @GetMapping("/hours")
+    public List<NodeDto> getNodeHoursData() {
+        //ex:18h->19h
+        List<Node> nodes= nodeService.getAllNodesHourData(null);
+
+        List<NodeDto> nodesDto=nodes.stream().map(n->modelMapper.map(n,NodeDto.class)).collect(Collectors.toList());
+        return nodesDto;
+    }
+    @GetMapping("/day")
+    public List<NodeDto> getNodeDayData() {
+        //ex:18h->19h
+        List<Node> nodes= nodeService.getAllNodesDayData(null);
+        List<NodeDto> nodesDto=nodes.stream().map(n->modelMapper.map(n,NodeDto.class)).collect(Collectors.toList());
+        return nodesDto;
+    }
+    @PostMapping("/new")
     public ResponseEntity<?> saveNode(@RequestParam("node") NodeDto nodeDto) {
         if (nodeDto != null) {
 
@@ -33,7 +50,7 @@ public class NodeController {
         return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
     }
 
-    @GetMapping("node")
+    @GetMapping("/")
     public List<NodeDto> getAllNode() {
          List<Node> nodes = nodeService.getAllNodes();
        List <NodeDto> nodeDto = nodes.stream().map((node)->modelMapper.map(node,NodeDto.class)).collect(Collectors.toList());

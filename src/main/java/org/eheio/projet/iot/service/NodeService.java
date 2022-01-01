@@ -1,15 +1,16 @@
 package org.eheio.projet.iot.service;
 
-import org.eheio.projet.iot.dto.request.NodeDto;
-import org.eheio.projet.iot.model.Envirenment;
 import org.eheio.projet.iot.model.Node;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.UUID;
 
 public interface NodeService {
     public List<Node> getAllNodes();
-
+    public List<Node> getAllNodesHourData(LocalDateTime time1);
+    public List<Node> getAllNodesDayData(LocalDateTime dateTime1);
     public Node getUsNodeById(UUID id);
 
     public void deleteNode(Node node);
