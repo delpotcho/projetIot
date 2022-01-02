@@ -10,5 +10,6 @@ import java.util.List;
 
 @Repository
 public interface NodeDataRepository extends JpaRepository<NodeData,Long> {
-    public List<NodeData> getNodeDataByDateTimeBetween(LocalDateTime date1, LocalDateTime date2);
+     List<NodeData> getNodeDataByDateTimeBetween(LocalDateTime date1, LocalDateTime date2);
+     NodeData getTopByOrderByDateTimeDesc();
 }

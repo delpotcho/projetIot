@@ -7,6 +7,7 @@ import org.eheio.projet.iot.model.Environment;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -15,9 +16,13 @@ public class NodeDto {
     private UUID id;
     private String name ;
     private UUID environmentId;
+
+    private  List<NodeDataDto>  data;
+
     public UUID getId() {
         return id;
     }
+
 
     public void setId(UUID id) {
         this.id = id;
@@ -42,4 +47,11 @@ public class NodeDto {
         this.environmentId = environmentId;
     }
 
+    public List<NodeDataDto> getData() {
+        return data;
+    }
+
+    public void setData(List<NodeDataDto> data) {
+        this.data = data;
+    }
 }

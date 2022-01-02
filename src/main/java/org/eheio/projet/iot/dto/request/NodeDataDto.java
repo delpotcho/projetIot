@@ -1,6 +1,7 @@
 package org.eheio.projet.iot.dto.request;
 
 import org.eheio.projet.iot.model.Node;
+import org.springframework.data.annotation.Transient;
 
 import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
@@ -12,8 +13,8 @@ public class NodeDataDto {
     private double temperature;
     private double humidity;
     private LocalDateTime dateTime;
-    private UUID idNode;
-    private Node node;
+    private UUID nodeId;
+
 
     public NodeDataDto(){
         this.dateTime= LocalDateTime.now(ZoneId.of("GMT+1"));
@@ -50,15 +51,14 @@ public class NodeDataDto {
         this.dateTime = dateTime;
     }
 
-    public UUID getIdNode() {
-        return idNode;
+    public UUID getNodeId() {
+        return nodeId;
     }
 
-    public void setIdNode(UUID idNode) {
-        this.idNode = idNode;
+    public void setNodeId(UUID idNode) {
+        this.nodeId = idNode;
     }
-    public void setNode(Node node){
-        this.node=node;
-    }
+
+
 
 }

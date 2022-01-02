@@ -25,7 +25,15 @@ public class NodeDataController {
     private NodeDataService nodeDataService;
     @Autowired
     ModelMapper modelMapper ;
+    //***Get Last Data
 
+    @GetMapping("/now")
+    public NodeDataDto getNodeNowData() {
+        //ex:18h->19h
+        NodeData nodeData= nodeDataService.getLastData();
+        NodeDataDto nodeDto=modelMapper.map(nodeData,NodeDataDto.class);
+        return nodeDto;
+    }
     /************* GET  DATA By [Hour,Day,Weekly,Monthly]**********************/
     /***!!!! change later !!!! **/
     @GetMapping("/hours")
@@ -48,10 +56,9 @@ public class NodeDataController {
     public ResponseEntity<ResponseMessage> newNodeData(@RequestBody NodeDataDto data){
         try{
             //Get Node
-            Node node =nodeService.getUsNodeById(data.getIdNode());
-            data.setNode(node);
+            Node node =nodeService.getUsNodeById(data.getNodeId());
             NodeData nodeData = modelMapper.map(data,NodeData.class);
-
+            nodeData.setNode(node);
             nodeDataService.saveNodeData(nodeData);
             return ResponseEntity.ok(new ResponseMessage("data inserted", HttpStatus.OK));
         }catch(RuntimeException e){
