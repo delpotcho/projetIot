@@ -8,7 +8,7 @@ import java.util.UUID;
 public interface EnvironmentService {
     public List<Environment> getAllEnvironments();
 
-    public Environment getUsEnvirenmenterById(UUID id);
+    public Environment getEnvironmentById(UUID id);
 
     public void deleteEnvirenement(Environment environment);
 

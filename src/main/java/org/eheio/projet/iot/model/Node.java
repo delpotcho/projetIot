@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -16,12 +17,14 @@ import java.util.UUID;
 public class Node {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(updatable = false, nullable = false, unique=true, columnDefinition = "BINARY(16)")
     private UUID id;
-    private Float temperature;
-    private Float humidity;
-    private LocalDateTime dateTime;
 
-
+    private String name;
+    @OneToMany(mappedBy ="node")
+    private List<NodeData> data;
+    @ManyToOne
+    private Environment environment;
     public UUID getId() {
         return id;
     }
@@ -30,31 +33,20 @@ public class Node {
         this.id = id;
     }
 
-    public Float getTemperature() {
-        return temperature;
+
+    public List<NodeData> getData() {
+        return data;
     }
 
-    public void setTemperature(Float temperature) {
-        this.temperature = temperature;
+    public void setData(List<NodeData> data) {
+        this.data = data;
     }
 
-    public Float getHumidity() {
-        return humidity;
+    public String getName() {
+        return name;
     }
 
-    public void setHumidity(Float humidity) {
-        this.humidity = humidity;
+    public void setName(String name) {
+        this.name = name;
     }
-
-    public LocalDateTime getDateTime() {
-        return dateTime;
-    }
-
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
-    }
-
-
-
-
 }

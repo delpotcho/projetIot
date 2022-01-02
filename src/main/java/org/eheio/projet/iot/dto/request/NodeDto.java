@@ -3,6 +3,7 @@ package org.eheio.projet.iot.dto.request;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.eheio.projet.iot.model.Environment;
 
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -12,11 +13,8 @@ import java.util.UUID;
 @AllArgsConstructor @NoArgsConstructor
 public class NodeDto {
     private UUID id;
-    private double temperature ;
-    private double humidity ;
-    private LocalDateTime dateTime ;
-
-
+    private String name ;
+    private UUID environmentId;
     public UUID getId() {
         return id;
     }
@@ -25,27 +23,23 @@ public class NodeDto {
         this.id = id;
     }
 
-    public double getTemperature() {
-        return temperature;
+
+
+
+    public String getName() {
+        return name;
     }
 
-    public void setTemperature(double temperature) {
-        this.temperature = temperature;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public double getHumidity() {
-        return humidity;
+    public UUID getEnvironmentId() {
+        return environmentId;
     }
 
-    public void setHumidity(double humidity) {
-        this.humidity = humidity;
+    public void setEnvironmentId(UUID environmentId) {
+        this.environmentId = environmentId;
     }
 
-    public LocalDateTime getDateTime() {
-        return dateTime;
-    }
-
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
-    }
 }

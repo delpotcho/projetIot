@@ -13,12 +13,13 @@ import java.util.UUID;
 public class Environment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(updatable = false, nullable = false, unique=true, columnDefinition = "BINARY(16)")
     private UUID ID;
     private String name ;
     @ManyToMany
     private List<Category> categories;
-    //@OneToMany (mappedBy = "envirenment")
-    //private List<Node> nodes ;
+    @OneToMany (mappedBy = "environment")
+    private List<Node> nodes ;
     private double minHumidity;
     private double maxHumidity;
     private double minTemperature;
@@ -70,5 +71,13 @@ public class Environment {
 
     public void setMaxTemperature(double maxTemperature) {
         this.maxTemperature = maxTemperature;
+    }
+
+    public List<Node> getNodes() {
+        return nodes;
+    }
+
+    public void setNodes(List<Node> nodes) {
+        this.nodes = nodes;
     }
 }

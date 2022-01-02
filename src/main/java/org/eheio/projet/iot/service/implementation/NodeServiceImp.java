@@ -20,35 +20,8 @@ public class NodeServiceImp implements NodeService {
     }
 
     @Override
-    public List<Node> getAllNodesHourData(LocalDateTime time1){
-        //ex:17h-->18h
-        if(time1==null){
-            LocalDateTime now=LocalDateTime.now(ZoneId.of("GMT+1")); //Get exact current time (GMT+1)
-            LocalDateTime beforeHour=now.minusHours(1);
-            System.out.println(now+"-----"+beforeHour);
-           return nodeRepsitory.getNodesByDateTimeBetween(beforeHour,now);
-
-        }
-        return nodeRepsitory.getNodesByDateTimeBetween(time1,time1.plusHours(1));
-    }
-
-    @Override
-    public List<Node> getAllNodesDayData(LocalDateTime dateTime1) {
-        //ex:00h-->23h
-
-        if(dateTime1==null){
-            LocalDateTime now=LocalDateTime.now(ZoneId.of("GMT+1"));
-            LocalDateTime beforeDay=now.minusDays(1);
-            System.out.println(now+"-----"+beforeDay);
-            return nodeRepsitory.getNodesByDateTimeBetween(beforeDay,now);
-
-        }
-        return nodeRepsitory.getNodesByDateTimeBetween(dateTime1,dateTime1.plusDays(1));
-    }
-
-    @Override
     public Node getUsNodeById(UUID id) {
-        return nodeRepsitory.getById(id);
+        return nodeRepsitory.findOneByUUID(id);
     }
 
     @Override
@@ -58,9 +31,11 @@ public class NodeServiceImp implements NodeService {
     }
 
     @Override
-    public void addNode(Node node) {
-        nodeRepsitory.save(node);
-
+    public Node addNode(Node node) throws RuntimeException{
+        if(node.getEnvironment()==null){
+            throw new RuntimeException("Environment Not Found");
+        }
+        return nodeRepsitory.save(node);
 
     }
 

@@ -11,6 +11,7 @@ import java.util.UUID;
 @Data @NoArgsConstructor @AllArgsConstructor
 public class Produit {@Id
 @GeneratedValue(strategy = GenerationType.AUTO)
+@Column(updatable = false, nullable = false, unique=true, columnDefinition = "BINARY(16)")
     private UUID ID ;
     private String name ;
     private Float tempMax;

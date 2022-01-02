@@ -1,6 +1,11 @@
 package org.eheio.projet.iot.controller;
 import org.eheio.projet.iot.dto.request.NodeDto;
+import org.eheio.projet.iot.dto.response.ResponseMessage;
+import org.eheio.projet.iot.model.Environment;
 import org.eheio.projet.iot.model.Node;
+import org.eheio.projet.iot.model.NodeData;
+import org.eheio.projet.iot.service.EnvironmentService;
+import org.eheio.projet.iot.service.NodeDataService;
 import org.eheio.projet.iot.service.NodeService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,33 +26,27 @@ public class NodeController {
     @Autowired
     private NodeService nodeService;
     @Autowired
+    private EnvironmentService environmentService;
+    @Autowired
     ModelMapper modelMapper ;
-    /************* GET  DATA By [Hour,Day,Weekly,Monthly]**********************/
-    /***!!!! change later !!!! **/
-    @GetMapping("/hours")
-    public List<NodeDto> getNodeHoursData() {
-        //ex:18h->19h
-        List<Node> nodes= nodeService.getAllNodesHourData(null);
 
-        List<NodeDto> nodesDto=nodes.stream().map(n->modelMapper.map(n,NodeDto.class)).collect(Collectors.toList());
-        return nodesDto;
-    }
-    @GetMapping("/day")
-    public List<NodeDto> getNodeDayData() {
-        //ex:18h->19h
-        List<Node> nodes= nodeService.getAllNodesDayData(null);
-        List<NodeDto> nodesDto=nodes.stream().map(n->modelMapper.map(n,NodeDto.class)).collect(Collectors.toList());
-        return nodesDto;
-    }
     @PostMapping("/new")
-    public ResponseEntity<?> saveNode(@RequestParam("node") NodeDto nodeDto) {
-        if (nodeDto != null) {
+    public ResponseEntity<ResponseMessage> saveNode(@RequestBody NodeDto nodeDto) {
+        try{
+            if (nodeDto != null) {
+                Environment environment = environmentService.getEnvironmentById(nodeDto.getEnvironmentId());
 
-           Node node = modelMapper.map(nodeDto,Node.class);
-            nodeService.addNode(node);
-            return ResponseEntity.ok().body("add well");
+                Node node = modelMapper.map(nodeDto,Node.class);
+                node.setEnvironment(environment);
+                nodeService.addNode(node);
+                return ResponseEntity.ok().body(new ResponseMessage("Node added",HttpStatus.OK));
+            }
+            return ResponseEntity.badRequest().body(new ResponseMessage("node info is empty",HttpStatus.BAD_REQUEST));
+        }catch (RuntimeException e){
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body(new ResponseMessage("Something wrong : "+e.getMessage(),HttpStatus.BAD_REQUEST));
         }
-        return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
+
     }
 
     @GetMapping("/")
@@ -57,13 +56,13 @@ public class NodeController {
          return nodeDto ;
     }
 
-    @GetMapping("node/{nodeId}")
+    @GetMapping("/{nodeId}")
     public NodeDto getNodeById(@PathVariable("nodeId") UUID nodeIde) {
        Node node= nodeService.getUsNodeById(nodeIde);
       return   modelMapper.map(node, NodeDto.class);
     }
 
-    @DeleteMapping("node")
+    @DeleteMapping("/")
     public ResponseEntity<?> deleteNode(@RequestParam("node") NodeDto nodeDto) {
         Node node = modelMapper.map(nodeDto,Node.class);
         nodeService.deleteNode(node);
