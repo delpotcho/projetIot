@@ -25,6 +25,7 @@ import { ItemEnvironmentComponent } from './Admin/Environment/list-environment/i
 import { EnvironmentDetailComponent } from './Admin/Environment/environment-detail/environment-detail.component';
 import { NodeFormComponent } from './Admin/Node/node-form/node-form.component';
 import { EnvironmentFormComponent } from './Admin/Environment/environment-form/environment-form.component';
+import { TempColorDirective } from './Admin/Environment/directive/temp-color.directive';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { EnvironmentFormComponent } from './Admin/Environment/environment-form/e
     EnvironmentDetailComponent,
     NodeFormComponent,
     EnvironmentFormComponent,
+    TempColorDirective,
   ],
   imports: [
     BrowserModule,

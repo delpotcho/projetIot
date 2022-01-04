@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
@@ -29,6 +30,13 @@ public class EnvironmentController {
 
         List<EnvironmentDto> environmentsDto=environments.stream().map((e) -> modelMapper.map(e, EnvironmentDto.class)).collect(Collectors.toList());
         return environmentsDto;
+    }
+    @GetMapping("/{id}")
+    public EnvironmentDto getEnvironment(@PathVariable("id") UUID id){
+        Environment environment= environmentService.getEnvironmentById(id);
+
+        EnvironmentDto environmentDto=modelMapper.map(environment, EnvironmentDto.class);
+        return environmentDto;
     }
 
     @PostMapping("/new")

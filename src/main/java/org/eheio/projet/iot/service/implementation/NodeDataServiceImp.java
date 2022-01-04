@@ -50,10 +50,7 @@ public class NodeDataServiceImp implements NodeDataService {
         }
         return nodeDataRepository.getNodeDataByDateTimeBetween(dateTime1,dateTime1.plusDays(1));
     }
-    @Override
-    public List<NodeData> getLastNodeData(UUID id){
-        return  nodeDataRepository.getTopByNodeIdOrderByDateTimeDesc(id);
-    }
+
     @Override
     public NodeData saveNodeData(NodeData data) throws RuntimeException {
         if(data.getNode()==null){

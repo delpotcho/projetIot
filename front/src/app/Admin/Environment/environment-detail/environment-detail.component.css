@@ -17,3 +17,46 @@
   background: #fff;
   border-radius: 15px;
 }
+.nodes {
+  padding: 10px 5px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+.nodes .node {
+  display: block;
+  border: 1px solid #ededed;
+  border-radius: 5px;
+  background: #fff;
+  margin-bottom: 15px;
+  text-align: center;
+  padding: 3px 0;
+}
+.nodes .node .node-name {
+  color: #505050;
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: 6px;
+  letter-spacing: 1px;
+  word-spacing: 2px;
+  margin-bottom: 3px;
+}
+.nodes .node .temperature {
+  color: #4ac730;
+}
+.nodes .node .humidity {
+  color: #55c0f1;
+}
+.nodes a.node {
+  padding: 10px 0;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.nodes a:hover {
+  transform: scale(1.04);
+}
+.nodes a .bx-plus {
+  font-size: 20px;
+  position: relative;
+  top: 3px;
+  margin-right: 3px;
+}

@@ -1,118 +1,168 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Chart, registerables } from 'chart.js';
 import { interval } from 'rxjs';
-import { EnvironmentService } from '../Service/environment.service';
+import { NodeServiceService } from '../../Node/Service/node-service.service';
+import { randomColor } from 'randomcolor';
+import {
+  Environment,
+  EnvironmentService,
+  NodeData,
+} from '../Service/environment.service';
+import util from '../../../Utils/utils.js';
 @Component({
   selector: 'app-environment-detail',
   templateUrl: './environment-detail.component.html',
   styleUrls: ['./environment-detail.component.css'],
 })
 export class EnvironmentDetailComponent implements OnInit {
-  constructor(private envService: EnvironmentService) {
+  environment: Environment;
+  envronmentId: string;
+  showDataMode: string;
+  constructor(
+    private envService: EnvironmentService,
+    private activeRoute: ActivatedRoute,
+    private nodeService: NodeServiceService
+  ) {
     Chart.register(...registerables);
+    this.activeRoute.params.subscribe(
+      (params) => (this.envronmentId = params['id'])
+    );
+    //get environment from server
+    envService
+      .getEnvironment(this.envronmentId)
+      .subscribe((data) => (this.environment = data));
   }
 
-  ngOnInit(): void {
+  private setColor(key): string {
+    let color = randomColor();
+    localStorage.setItem(key, color);
+    return color;
+  }
+  private initDatasetsTemperature(datasets) {
+    this.environment.nodes.forEach((n) =>
+      datasets.push({
+        label: n.name,
+        data: n.data.map((d) => d.temperature),
+        fill: false,
+        borderColor:
+          localStorage.getItem('color-' + n.name) == null
+            ? this.setColor('color-' + n.name)
+            : localStorage.getItem('color-' + n.name),
+        tension: 0.1,
+      })
+    );
+  }
+
+  private initDatasetsHumidity(datasets) {
+    this.environment.nodes.forEach((n) =>
+      datasets.push({
+        label: n.name,
+        data: n.data.map((d) => d.humidity),
+        fill: false,
+        borderColor: localStorage.getItem('color-' + n.name),
+      })
+    );
+  }
+
+  private drawChartTemperature(labels: string[], datasets: []) {
     const chartTemp = new Chart('chart-temp', {
       type: 'line',
       data: {
-        labels: [
-          '01',
-          '02',
-          '03',
-          '04',
-          '05',
-          '06',
-          '08',
-          '09',
-          '10',
-          '11',
-          '12',
-          '13',
-          '14',
-          '15',
-          '16',
-          '17',
-          '18',
-          '19',
-          '20',
-          '21',
-          '22',
-          '23',
-          '00',
-        ],
-
-        datasets: [
-          {
-            label: 'Temp',
-            data: [65, 59, 80, 81, 56, 55, 40],
-            fill: false,
-            borderColor: 'rgb(75, 16, 155)',
-            tension: 0.1,
-          },
-        ],
+        labels: labels,
+        datasets: datasets,
       },
       options: {
+        plugins: {
+          title: {
+            display: true,
+            text: 'Temperature C°',
+            padding: 15,
+            font: {
+              size: 16,
+            },
+          },
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                var temp = context.parsed.y + 'C°';
+                return temp;
+              },
+            },
+          },
+        },
         scales: {
           x: {
             ticks: {
               autoSkip: true,
-              maxTicksLimit: 20,
+              maxTicksLimit: 12,
             },
           },
         },
       },
     });
+  }
+  private drawChartHumidity(labels: string[], datasets: []) {
     const chartHumidity = new Chart('chart-humidity', {
       type: 'line',
       data: {
-        labels: [
-          '01',
-          '02',
-          '03',
-          '04',
-          '05',
-          '06',
-          '08',
-          '09',
-          '10',
-          '11',
-          '12',
-          '13',
-          '14',
-          '15',
-          '16',
-          '17',
-          '18',
-          '19',
-          '20',
-          '21',
-          '22',
-          '23',
-          '00',
-        ],
-        datasets: [
-          {
-            label: 'Humidity',
-            data: [65, 59, 80, 81, 56, 55, 40],
-            fill: false,
-            borderColor: 'rgb(75, 192, 192)',
-            tension: 0.1,
-          },
-        ],
+        labels: labels,
+        datasets: datasets,
       },
       options: {
+        plugins: {
+          title: {
+            display: true,
+            text: 'HUMIDITY %',
+            padding: 15,
+            font: {
+              size: 16,
+            },
+          },
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                var humidity = context.parsed.y + '%';
+                return humidity;
+              },
+            },
+          },
+        },
         scales: {
           x: {
             ticks: {
               autoSkip: true,
-              maxTicksLimit: 10,
-              stepSize: 2,
+              maxTicksLimit: 12,
             },
           },
         },
       },
     });
+  }
+
+  ngOnInit(): void {
+    let datasetsTemperature: [] = [];
+    let datasetsHumidity: [] = [];
+
+    setTimeout(() => {
+      /*
+          show lebels (show time) based on  the largest data for node   
+            ex:node1.data=['01/01/2021 10:12:00','01/01/2021 10:12:00'] & 
+            node2.data=['01/01/2021 10:12:00','01/01/2021 10:12:00','01/01/2021 10:12:00']
+          this case labels is data.datetime for node2
+    */
+
+      let labels: string[] = this.environment.nodes
+        ?.sort((n2, n1) => (n2.data.length > n1.data.length ? -1 : 1))[0]
+        .data.map((d) => new Date(d.dateTime).toLocaleTimeString());
+      /*********** initilize Datasets ***********/
+      this.initDatasetsTemperature(datasetsTemperature);
+      this.initDatasetsHumidity(datasetsHumidity);
+      /***********End Initialise Datasets ***********/
+
+      this.drawChartTemperature(labels, datasetsTemperature);
+      this.drawChartHumidity(labels, datasetsHumidity);
+    }, 2000); //reason to use timeout: wait to get Environment object
 
     //get data evrey 10s
     const inter = interval(10000);

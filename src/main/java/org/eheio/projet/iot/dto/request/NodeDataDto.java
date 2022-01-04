@@ -14,7 +14,7 @@ public class NodeDataDto {
     private double humidity;
     private LocalDateTime dateTime;
     private UUID nodeId;
-
+    private String nameNode;
 
     public NodeDataDto(){
         this.dateTime= LocalDateTime.now(ZoneId.of("GMT+1"));
@@ -59,6 +59,11 @@ public class NodeDataDto {
         this.nodeId = idNode;
     }
 
+    public String getNameNode() {
+        return nameNode;
+    }
 
-
+    public void setNameNode(String nameNode) {
+        this.nameNode = nameNode;
+    }
 }

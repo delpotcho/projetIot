@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Environment, EnvironmentService, NodeData } from '../../Service/environment.service';
+import { Environment, EnvironmentService } from '../../Service/environment.service';
 
 @Component({
   selector: 'app-item-environment',
@@ -8,6 +8,7 @@ import { Environment, EnvironmentService, NodeData } from '../../Service/environ
 })
 export class ItemEnvironmentComponent implements OnInit {
   @Input() environment: Environment;
+  
 
   constructor(private environmentService:EnvironmentService) {}
 

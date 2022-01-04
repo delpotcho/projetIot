@@ -2,19 +2,28 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-export interface Environment {
+
+
+export interface Node{
+  id: String;
   name: String;
+  data:NodeData[]
+}
+export interface Environment {
+  id: String;
+  name:String,
   minTemperature: number;
   maxTemperature: number;
   minHumidity: number;
   maxHumidity: number;
-  nodes: string;
+  nodes: Node[];
 }
-export interface NodeData{
-  id:string,
-  temperature:number,
-  humidity:number,
-  dateTime:string,
+export interface NodeData {
+  id: string;
+  name: string;
+  temperature: number;
+  humidity: number;
+  dateTime: string;
 }
 
 @Injectable({
@@ -27,8 +36,10 @@ export class EnvironmentService {
   public getEnvironments(): Observable<any> {
     return this.http.get(this.url + '/environment/', { withCredentials: true });
   }
-  public getLastDataNode(id:String): Observable<any> {
-    return this.http.get(this.url + '/node/data/now/'+id, { withCredentials: true });
+  public getEnvironment(id: String): Observable<any> {
+    return this.http.get(this.url + '/environment/' + id, {
+      withCredentials: true,
+    });
   }
 
   public newEnvironment(environment: Environment) {

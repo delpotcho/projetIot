@@ -16,14 +16,36 @@
 </div>
 <div class="env-detail-body">
   <div class="row">
-    <div class="col-md-6 mb-3">
+    <div class="col-lg-5 mb-3">
       <div class="nodes-chart shadow">
         <canvas id="chart-temp"></canvas>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-lg-5">
       <div class="nodes-chart shadow mb-3">
         <canvas id="chart-humidity"></canvas>
+      </div>
+    </div>
+    <div class="col-lg-2">
+      <div class="nodes shadow mb-3">
+        <a class="node"><i class="bx bx-plus"></i> New Node</a>
+        <div *ngFor="let node of environment?.nodes" class="node">
+          <h5 class="node-name h6">{{ node.name }}</h5>
+          <span
+            class="text-center temperature fw-bold mr-2"
+            TempColor
+            [lastTemp]="node.data[node.data.length - 1].temperature"
+            [env]="environment"
+          >
+            <!-- show last temp for each node -->
+            <i class="bx bxs-hot"></i>
+            {{ node.data[node.data.length - 1].temperature }} C°
+          </span>
+          <span class="text-center humidity fw-bold fs-6">
+            <i class="bx bx-cloud-light-rain"></i>
+            {{ node.data[node.data.length - 1].humidity }} %</span
+          >
+        </div>
       </div>
     </div>
   </div>

@@ -27,15 +27,7 @@ public class NodeDataController {
     private NodeDataService nodeDataService;
     @Autowired
     ModelMapper modelMapper ;
-    //***Get Last Data
 
-    @GetMapping("/now/{nodeId}")
-    public List<NodeDataDto> getNodeNowData(@PathVariable("nodeId")UUID nodeId) {
-        //ex:18h->19h
-        List<NodeData> nodesData= nodeDataService.getLastNodeData(nodeId);
-        List<NodeDataDto> nodesDto=nodesData.stream().map(n->modelMapper.map(n,NodeDataDto.class)).collect(Collectors.toList());
-        return nodesDto;
-    }
     /************* GET  DATA By [Hour,Day,Weekly,Monthly]**********************/
     /***!!!! change later !!!! **/
     @GetMapping("/hours")
