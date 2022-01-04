@@ -6,12 +6,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 public interface NodeDataService  {
     List<NodeData> getDataNode(Node node);
     List<NodeData> getAllNodesHourData(LocalDateTime time1);
     List<NodeData> getAllNodesDayData(LocalDateTime dateTime1);
-    NodeData getLastData();
+    List<NodeData> getLastNodeData(UUID id);
     NodeData saveNodeData(NodeData data);
 
 }

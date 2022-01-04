@@ -37,9 +37,6 @@ public class JWTProvider {
         }catch (JwtException e){
             return  null;
         }
-
-
-
     }
     public Authentication getAuthentication(String username){
         UserDetails user=userService.loadUserByUsername(username);

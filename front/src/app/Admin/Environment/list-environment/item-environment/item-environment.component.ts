@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Environment } from '../../Service/environment.service';
+import { Environment, EnvironmentService, NodeData } from '../../Service/environment.service';
 
 @Component({
   selector: 'app-item-environment',
@@ -9,9 +9,16 @@ import { Environment } from '../../Service/environment.service';
 export class ItemEnvironmentComponent implements OnInit {
   @Input() environment: Environment;
 
-  constructor() {}
+  constructor(private environmentService:EnvironmentService) {}
 
   ngOnInit(): void {
   
   }
+
+  getLastDataNode(id:string){
+    console.log(id);
+
+  }
+
+
 }

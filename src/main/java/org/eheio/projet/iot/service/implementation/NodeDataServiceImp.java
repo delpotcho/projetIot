@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class NodeDataServiceImp implements NodeDataService {
@@ -50,8 +51,8 @@ public class NodeDataServiceImp implements NodeDataService {
         return nodeDataRepository.getNodeDataByDateTimeBetween(dateTime1,dateTime1.plusDays(1));
     }
     @Override
-    public NodeData getLastData(){
-        return  nodeDataRepository.getTopByOrderByDateTimeDesc();
+    public List<NodeData> getLastNodeData(UUID id){
+        return  nodeDataRepository.getTopByNodeIdOrderByDateTimeDesc(id);
     }
     @Override
     public NodeData saveNodeData(NodeData data) throws RuntimeException {

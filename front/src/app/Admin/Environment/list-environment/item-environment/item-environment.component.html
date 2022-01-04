@@ -13,19 +13,10 @@
         </p>
       </div>
     </div>
-
-    <div class="nodes">
-      <div class="node shadow d-inline-block px-2 mr-2">
-        <span class="node-name">Node 1</span>
+    <div class="nodes" >
+      <div *ngFor="let node of environment.nodes" class="node shadow d-inline-block px-2 mr-2">
+        <span class="node-name">{{node.data[0].humidity}}</span>
         <h6 class="text-center">59 C°</h6>
-      </div>
-      <div class="node shadow d-inline-block px-2 mr-2">
-        <span class="node-name">Node 2</span>
-        <h6 class="text-center">59 C°</h6>
-      </div>
-      <div class="node shadow d-inline-block px-2 mr-2">
-        <span class="node-name">Node 3</span>
-        <h6 class="text-center danger">59 C°</h6>
       </div>
     </div>
   </a>

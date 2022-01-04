@@ -95,19 +95,7 @@
         <span class="msg-error">min Humidity is required</span>
       </div>
     </div>
-    <div class="form-groupe">
-      <label for="nodes"><i class="fas fa-node-js"></i>Nodes</label>
-      <input type="text" class="my-input" id="nodes" formControlName="nodes" />
-      <div
-        *ngIf="
-          environmentForm.get('nodes').invalid &&
-          (environmentForm.get('nodes').dirty ||
-            environmentForm.get('nodes').touched)
-        "
-      >
-        <span class="msg-error">nodes is required</span>
-      </div>
-    </div>
+    
 
     <button
       class="my-btn environment-btn"

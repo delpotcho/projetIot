@@ -7,9 +7,11 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Repository
 public interface NodeDataRepository extends JpaRepository<NodeData,Long> {
      List<NodeData> getNodeDataByDateTimeBetween(LocalDateTime date1, LocalDateTime date2);
      NodeData getTopByOrderByDateTimeDesc();
+     List<NodeData> getTopByNodeIdOrderByDateTimeDesc(UUID id);
 }

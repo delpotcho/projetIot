@@ -10,6 +10,12 @@ export interface Environment {
   maxHumidity: number;
   nodes: string;
 }
+export interface NodeData{
+  id:string,
+  temperature:number,
+  humidity:number,
+  dateTime:string,
+}
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +26,9 @@ export class EnvironmentService {
 
   public getEnvironments(): Observable<any> {
     return this.http.get(this.url + '/environment/', { withCredentials: true });
+  }
+  public getLastDataNode(id:String): Observable<any> {
+    return this.http.get(this.url + '/node/data/now/'+id, { withCredentials: true });
   }
 
   public newEnvironment(environment: Environment) {
