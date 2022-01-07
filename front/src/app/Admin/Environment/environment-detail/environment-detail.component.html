@@ -1,3 +1,8 @@
+<div class="new-node" *ngIf="addNewNode">
+<div class="overlay" (click)="hideForm()"></div>
+<app-node-form [environmentId]="environment.id"></app-node-form>
+</div>
+
 <p class="text-center">This page is Environment Detail 1</p>
 <div class="env-detail-header row justify-content-center">
   <div class="col-md-3 mb-3">
@@ -28,22 +33,22 @@
     </div>
     <div class="col-lg-2">
       <div class="nodes shadow mb-3">
-        <a class="node"><i class="bx bx-plus"></i> New Node</a>
+        <a class="node" (click)="showFormNode()"><i class="bx bx-plus"></i> New Node</a>
         <div *ngFor="let node of environment?.nodes" class="node">
-          <h5 class="node-name h6">{{ node.name }}</h5>
+          <h5 class="node-name h6">{{ node?.name }}</h5>
           <span
             class="text-center temperature fw-bold mr-2"
             TempColor
-            [lastTemp]="node.data[node.data.length - 1].temperature"
+            [lastTemp]="node?.data[node.data.length - 1]?.temperature"
             [env]="environment"
           >
             <!-- show last temp for each node -->
             <i class="bx bxs-hot"></i>
-            {{ node.data[node.data.length - 1].temperature }} C°
+            {{ node?.data[node.data.length - 1]?.temperature }} C°
           </span>
           <span class="text-center humidity fw-bold fs-6">
             <i class="bx bx-cloud-light-rain"></i>
-            {{ node.data[node.data.length - 1].humidity }} %</span
+            {{ node?.data[node.data.length - 1]?.humidity }} %</span
           >
         </div>
       </div>

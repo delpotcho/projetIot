@@ -1,3 +1,13 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #6969699e;
+  min-height: 100vh;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+}
 .env-detail-header {
   margin-top: 15px;
 }

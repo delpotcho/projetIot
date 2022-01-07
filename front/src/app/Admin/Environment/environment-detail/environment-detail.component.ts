@@ -19,6 +19,7 @@ export class EnvironmentDetailComponent implements OnInit {
   environment: Environment;
   envronmentId: string;
   showDataMode: string;
+  addNewNode:boolean;
   constructor(
     private envService: EnvironmentService,
     private activeRoute: ActivatedRoute,
@@ -28,10 +29,13 @@ export class EnvironmentDetailComponent implements OnInit {
     this.activeRoute.params.subscribe(
       (params) => (this.envronmentId = params['id'])
     );
-    //get environment from server
-    envService
-      .getEnvironment(this.envronmentId)
-      .subscribe((data) => (this.environment = data));
+   
+  }
+  ngOnInit(): void {
+     //get environment from server
+     this.envService
+     .getEnvironment(this.envronmentId)
+     .subscribe((data) => {this.environment = data; this.initData()});
   }
 
   private setColor(key): string {
@@ -140,11 +144,11 @@ export class EnvironmentDetailComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
+  initData(): void {
     let datasetsTemperature: [] = [];
     let datasetsHumidity: [] = [];
 
-    setTimeout(() => {
+   
       /*
           show lebels (show time) based on  the largest data for node   
             ex:node1.data=['01/01/2021 10:12:00','01/01/2021 10:12:00'] & 
@@ -162,10 +166,17 @@ export class EnvironmentDetailComponent implements OnInit {
 
       this.drawChartTemperature(labels, datasetsTemperature);
       this.drawChartHumidity(labels, datasetsHumidity);
-    }, 2000); //reason to use timeout: wait to get Environment object
+    //reason to use timeout: wait to get Environment object
 
     //get data evrey 10s
     const inter = interval(10000);
     const data = inter.subscribe(() => {});
+  }
+
+  public showFormNode(){
+    this.addNewNode= true;
+  }
+  public hideForm(){
+    this.addNewNode=false;
   }
 }

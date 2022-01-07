@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 export interface Node{
   id: String;
   name: String;
+  environmentId:String,
   data:NodeData[]
 }
 export interface Environment {

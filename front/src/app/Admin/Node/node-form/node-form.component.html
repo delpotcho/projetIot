@@ -1,1 +1,17 @@
-<p>node-form works!</p>
+<div class="form-node">
+    <form [formGroup]="nodeGroup" (submit)="onSubmit()">
+        <div class="form-group mb-2">
+            <label for="id-environment">
+                Id Environment
+            </label>
+            <input type="text" id="id-environment" class="form-control" formControlName="environmentId" readonly />
+        </div>
+         <div class="form-group mb-2">
+            <label for="name-node">
+                Name Node
+            </label>
+            <input type="text" id="name-node" class="form-control" formControlName="name"/>
+        </div>
+        <button class="my-btn">New Node</button>
+    </form>
+</div>
