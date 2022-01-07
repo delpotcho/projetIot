@@ -1,41 +1,42 @@
-
 <router-outlet></router-outlet>
-<div class="header">
-    <h3>| product List</h3>
+
+<div class="product-list">
+  <div class="product-list-header">
+    <button (click)="changeOrder()" class="mb-2 my-btn order">
+      <i class="bx bx-sort-alt-2"></i>
+    </button>
   </div>
-  <div class="product-list">
-    <div class="product-list-header">
-      <button class="my-btn add-product" [routerLink]="['new']">
-        <i class="bx bx-plus"></i>New product
-      </button>
-      <button (click)="changeOrder()" class="mb-2 my-btn order"><i class='bx bx-sort-alt-2'></i></button>
-    </div>
-    <table class="table table-bordered product-table">
-      <thead>
-        <tr>
-          <th *ngFor="let header of headers">
-            {{ header }}
-          </th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let product of products ">
-          <td *ngFor="let column of headers">
-            {{ product[column] }}
-          </td>
-          <td>
-            <button class="my-btn mr-2 btn-edit" [routerLink]="['edit', product['id']]">
-              <i class="bx bx-edit-alt"></i></button
-            ><button class="my-btn btn-delete mr-2" (click)="deleteProduct(product['id'])">
-              <i class="bx bx-trash"></i>
-            </button>
-            <button class="my-btn btn-delete" [routerLink]="[product['id']]">
-              <i class='bx bx-detail'></i>
-            </button>
-            
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <table class="table table-bordered product-table">
+    <thead>
+      <tr>
+        <th *ngFor="let header of headers">
+          {{ header }}
+        </th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td *ngFor="let column of headers">
+          {{ product[column] }}
+        </td>
+        <td>
+          <button
+            class="my-btn mr-2 btn-edit"
+            [routerLink]="['edit', product['id']]"
+          >
+            <i class="bx bx-edit-alt"></i></button
+          ><button
+            class="my-btn btn-delete mr-2"
+            (click)="deleteProduct(product['id'])"
+          >
+            <i class="bx bx-trash"></i>
+          </button>
+          <button class="my-btn btn-delete" [routerLink]="[product['id']]">
+            <i class="bx bx-detail"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -18,11 +18,11 @@ export class FormProductComponent implements OnInit {
   product: ProductElement;
   productData = {
     id: new FormControl(''),
-    code: new FormControl(''),
-    title: new FormControl('', [Validators.minLength(4), Validators.required]),
-    userId: new FormControl('', [Validators.required]),
-    description: new FormControl('', [Validators.required]),
-    price: new FormControl(0, [Validators.min(1), Validators.required]),
+    name: new FormControl(''),
+    maxTemperature: new FormControl('', [Validators.minLength(4), Validators.required]),
+    minTemperature: new FormControl('', [Validators.required]),
+    maxHumidity: new FormControl('', [Validators.required]),
+    minHumidity: new FormControl(0, [Validators.min(1), Validators.required]),
   };
   constructor(
     private formBuilder: FormBuilder,
@@ -47,18 +47,18 @@ export class FormProductComponent implements OnInit {
           () => {
             this.productData = {
               id: new FormControl(this.product.id),
-              code: new FormControl(this.product.code),
-              title: new FormControl(this.product.title, [
+              name: new FormControl(this.product.name),
+              maxTemperature: new FormControl(this.product.maxTemperature, [
                 Validators.minLength(4),
                 Validators.required,
               ]),
-              userId: new FormControl(this.product.authorId, [
+              minTemperature: new FormControl(this.product.minTemperature, [
                 Validators.required,
               ]),
-              description: new FormControl(this.product.description, [
+              maxHumidity: new FormControl(this.product.maxHumidity, [
                 Validators.required,
               ]),
-              price: new FormControl(this.product.price, [
+              minHumidity: new FormControl(this.product.minHumidity, [
                 Validators.min(1),
                 Validators.required,
               ]),

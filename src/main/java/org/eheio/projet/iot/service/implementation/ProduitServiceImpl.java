@@ -16,7 +16,7 @@ public class ProduitServiceImpl implements ProduitService {
     
     @Override
     public List<Produit> getAllProduits() {
-        return null;
+        return produitRepository.findAll();
     }
 
     @Override

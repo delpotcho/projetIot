@@ -3,46 +3,34 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 export interface ProductElement {
-  id:number;
-  code: string;
-  title: string;
-  description: string;
-  price: number;
-  numberOfPage:string;
-  verified:boolean;
-  createdAt:Date;
-  updatedAt:Date;
-  authorUsername: string;
-  authorId:number;
+  id: number;
+  name: String;
+  maxTemperature: number;
+  minTemperature: number;
+  maxHumidity: number;
+  minHumidity: number;
 }
-const server="http://localhost:8080";
+const server = 'http://localhost:8080';
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProductService {
-  constructor(private http:HttpClient) { }
-  
+  constructor(private http: HttpClient) {}
 
-  getProducts():Observable<ProductElement[]>{
-    
-    return this.http.get<ProductElement[]>(server+"/product/",{withCredentials:true});
+  getProducts(): Observable<ProductElement[]> {
+    return this.http.get<ProductElement[]>(server + '/product/', {
+      withCredentials: true,
+    });
   }
-  getProductById(id:String):Observable<ProductElement>{
-    return this.http.get<ProductElement>(server+"/product/"+id);
+  getProductById(id: String): Observable<ProductElement> {
+    return this.http.get<ProductElement>(server + '/product/' + id);
   }
-  newProduct(data:ProductElement):Observable<ProductElement>{
-     return this.http.post<ProductElement>(server+"/product/new",data);
+  newProduct(data: ProductElement): Observable<ProductElement> {
+    return this.http.post<ProductElement>(server + '/product/new', data);
   }
-  getProductByCode(code:string):ProductElement{
+  getProductByCode(code: string): ProductElement {
     return null;
   }
-  editProduct(newBook:ProductElement):void{
-    
-  }
-  delteProduct(code:string){
-  
-
-  }
-
-  
+  editProduct(newBook: ProductElement): void {}
+  delteProduct(code: string) {}
 }

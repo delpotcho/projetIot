@@ -1,8 +1,14 @@
-<div class="adimn-book">
+<div class="adimn-product">
   <!-- [books] @input (books in child component) and "books" source from parent (books in parent component)-->
   <!-- (bookCreated) is a event created in child component by EventEmmiter<> used  to send data from child to parent  by bookCreated.emit() -->
   <!-- <app-form-book class="form-book"    [books]="books"  (bookCreated)=onBookAdded($event)></app-form-book> -->
 
   <!-- <app-form-book class="form-book" [codeBook]="codeBook"></app-form-book> -->
+  <div class="header">
+    <h3>| product List</h3>
+  </div>
+  <button class="my-btn add-product" [routerLink]="['new']">
+    <i class="bx bx-plus"></i>New product
+  </button>
   <router-outlet></router-outlet>
 </div>

@@ -1,6 +1,6 @@
 <div class="overlay" (click)="returnToListProducts()"></div>
 <div class="product-info">
-  <h4 class="title" *ngIf="idProduct != null; else headerproductNewForm">
+  <h4 class="name" *ngIf="idProduct != null; else headerproductNewForm">
     Edit Product
   </h4>
   <ng-template #headerproductNewForm>
@@ -8,69 +8,89 @@
   </ng-template>
   <form (ngSubmit)="onSubmit()" [formGroup]="productForm">
     <div class="form-groupe">
-      <label for="title">Title</label>
-      <input type="text" class="my-input" id="title" formControlName="title" />
+      <label for="name">name</label>
+      <input type="text" class="my-input" id="name" formControlName="name" />
       <div
         *ngIf="
-          productForm.get('title').invalid &&
-          (productForm.get('title').dirty || productForm.get('title').touched)
+          productForm.get('name').invalid &&
+          (productForm.get('name').dirty || productForm.get('name').touched)
         "
       >
-        <span class="msg-error">please enter a valid author name</span>
+        <span class="msg-error">please enter a valid name</span>
       </div>
     </div>
     <div class="form-groupe">
-      <label for="author">id Author</label>
+      <label for="author">Min Temperature</label>
       <input
         type="text"
         class="my-input"
-        id="author"
-        formControlName="userId"
+        id="min-temperature"
+        formControlName="minTemperature"
       />
       <div
         *ngIf="
-          productForm.get('userId').invalid &&
-          (productForm.get('userId').dirty || productForm.get('userId').touched)
+          productForm.get('minTemperature').invalid &&
+          (productForm.get('minTemperature').dirty ||
+            productForm.get('minTemperature').touched)
         "
       >
-        <span class="msg-error">please enter a valid author name</span>
+        <span class="msg-error">please enter a valid Min Temperature</span>
       </div>
     </div>
     <div class="form-groupe">
-      <label for="description">Description</label>
+      <label for="description">Max Temperature</label>
       <input
         type="text"
         class="my-input"
-        id="description"
-        formControlName="description"
+        id="max-temperature"
+        formControlName="maxTemperature"
       />
-      <small>words: {{ productForm.get("description").value }}</small>
+      <small>words: {{ productForm.get("maxTemperature").value }}</small>
       <div
         *ngIf="
-          productForm.get('description').invalid &&
-          (productForm.get('description').dirty ||
-            productForm.get('description').touched)
+          productForm.get('maxTemperature').invalid &&
+          (productForm.get('maxTemperature').dirty ||
+            productForm.get('maxTemperature').touched)
         "
       >
-        <span class="msg-error">description is required</span>
+        <span class="msg-error">max-temperature is required</span>
       </div>
     </div>
     <div class="form-groupe">
-      <label for="price">Price</label>
-      <input type="text" class="my-input" id="price" formControlName="price" />
+      <label for="min-humidity">Min Humidity</label>
+      <input
+        type="text"
+        class="my-input"
+        id="min-humidity"
+        formControlName="minHumidity"
+      />
       <div
         *ngIf="
-          productForm.get('price').invalid &&
-          (productForm.get('price').dirty || productForm.get('price').touched)
+          productForm.get('minHumidity').invalid &&
+          (productForm.get('minHumidity').dirty ||
+            productForm.get('minHumidity').touched)
         "
       >
-        <span class="msg-error">please enter price</span>
+        <span class="msg-error">please enter min-humidity</span>
       </div>
-      <small
-        >Normal Price: {{ productForm.get("price").value }} | Price Pow(2):
-        {{ productForm.get("price").value }} | Price Pow(3):
-        {{ productForm.get("price").value }}</small
+    </div>
+    <div class="form-groupe">
+      <label for="max-humidity">Max Humidity</label>
+      <input
+        type="text"
+        class="my-input"
+        id="max-humidity"
+        formControlName="maxHumidity"
+      />
+      <div
+        *ngIf="
+          productForm.get('maxHumidity').invalid &&
+          (productForm.get('maxHumidity').dirty ||
+            productForm.get('maxHumidity').touched)
+        "
       >
+        <span class="msg-error">please enter max-humidity</span>
+      </div>
     </div>
 
     <button

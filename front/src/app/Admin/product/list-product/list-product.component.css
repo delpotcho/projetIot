@@ -1,33 +1,20 @@
-.admin-book table.book-table {
+.admin-product table.product-table {
   background: #fbfbfb;
 }
-.book-list-header {
+.product-list-header {
   display: flex;
   justify-content: space-between;
 }
-button.my-btn {
-  padding: 10px 20px;
-  transition: 0.3s transform ease;
-  background: #fff;
-}
-button.my-btn:hover {
-  transform: scale(1.04);
-}
-button.my-btn .bx-plus {
-  font-size: 20px;
-  position: relative;
-  top: 3px;
-  margin-right: 3px;
-}
-.adimn-book .book-list {
+
+.adimn-product .product-list {
   background: #fff;
   width: 90%;
   margin: 60px auto;
 }
-.adimn-book .form-book {
+.adimn-product .form-product {
   display: block;
 }
-.adimn-book .form-book.active {
+.adimn-product .form-product.active {
   display: block;
 }
 
