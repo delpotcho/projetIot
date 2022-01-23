@@ -9,6 +9,7 @@ public class ProductDto {
     private double minTemperature;
     private double maxHumidity;
     private double minHumidity;
+    private UUID environmentId;
 
     public UUID getId() {
         return id;
@@ -54,5 +55,13 @@ public class ProductDto {
     }
     public void setMinHumidity(double minHumidity) {
         this.minHumidity = minHumidity;
+    }
+
+    public UUID getEnvironmentId() {
+        return environmentId;
+    }
+
+    public void setEnvironmentId(UUID environmentId) {
+        this.environmentId = environmentId;
     }
 }

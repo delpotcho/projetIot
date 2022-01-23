@@ -20,4 +20,9 @@ export class NodeServiceService {
    public newNode(node :Node):Observable<any>{
      return this.http.post<any>(this.url+"/node/new",node,{withCredentials:true});
    }
+
+   getLastNodeData(nodeId:String){
+     return this.http.get(this.url+"/node/"+nodeId+"/last");
+   }
+
 }

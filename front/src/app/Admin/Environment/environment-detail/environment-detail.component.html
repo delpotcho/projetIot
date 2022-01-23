@@ -52,11 +52,14 @@
             <i class="bx bx-cloud-light-rain"></i>
             {{ node?.data[node.data.length - 1]?.humidity }} %</span
           >
+          <div>
+            <small class="id-node">id:{{node?.id}}</small>
+          </div>
         </div>
       </div>
     </div>
     <div class="col-md-8">
-      <list-product></list-product>
+      <list-product [environment]="environment"></list-product>
     </div>
   </div>
 </div>

@@ -34,14 +34,18 @@ public class ProductController {
 //        return  ResponseEntity.ok().body(msg);
 //    }
     @PostMapping("/new")
-    public ResponseEntity<?> addProduct(@RequestParam("product") ProductDto productDto) {
+    public ResponseEntity<ResponseMessage> addProduct(@RequestBody ProductDto productDto) {
 
         if (productDto != null) {
             Produit produit = modelMapper.map(productDto, Produit.class);
+            System.out.println(produit.getEnvironment().getID());
+            if(produit.getEnvironment().getID()==null){
+                return ResponseEntity.badRequest().body(new ResponseMessage("Environment Not Found",HttpStatus.BAD_REQUEST));
+            }
             produitService.addProduit(produit);
-           return ResponseEntity.ok().body("add well");
+           return ResponseEntity.ok().body(new ResponseMessage("product added",HttpStatus.CREATED));
         } else {
-            return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
+            return ResponseEntity.badRequest().body(new ResponseMessage("somthing wrong",HttpStatus.BAD_REQUEST));
         }
 
     }

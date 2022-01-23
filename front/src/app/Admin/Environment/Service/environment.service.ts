@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ProductElement } from '../../product/service/product.service';
 
 
 
@@ -18,6 +19,7 @@ export interface Environment {
   minHumidity: number;
   maxHumidity: number;
   nodes: Node[];
+  products:ProductElement[]
 }
 export interface NodeData {
   id: string;

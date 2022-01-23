@@ -18,4 +18,5 @@ public interface NodeRepsitory extends JpaRepository<Node,UUID>{
     @Query("SELECT n FROM Node n where n.id = :id")
     Node findOneByUUID(@Param("id") UUID id);
 
+
 }

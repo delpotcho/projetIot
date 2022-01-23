@@ -1,6 +1,7 @@
 package org.eheio.projet.iot.dto.response;
 
 import org.eheio.projet.iot.dto.request.NodeDto;
+import org.eheio.projet.iot.model.Produit;
 
 import java.util.List;
 import java.util.UUID;
@@ -13,6 +14,7 @@ public class EnvironmentDto {
     private double minHumidity;
     private double maxHumidity;
     private List<NodeDto> nodes ;
+    private List<ProductDto> products;
 
     public UUID getId() {
         return id;
@@ -68,5 +70,13 @@ public class EnvironmentDto {
 
     public void setNodes(List<NodeDto> nodes) {
         this.nodes = nodes;
+    }
+
+    public List<ProductDto> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<ProductDto> products) {
+        this.products = products;
     }
 }

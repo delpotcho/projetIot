@@ -18,6 +18,8 @@ public class Produit {@Id
     private double minTemperature;
     private double maxHumidity;
     private double minHumidity;
+    @ManyToOne
+    private Environment environment;
     @ManyToMany
     private List<Category> categories;
 
@@ -75,5 +77,13 @@ public class Produit {@Id
 
     public void setCategories(List<Category> categories) {
         this.categories = categories;
+    }
+
+    public Environment getEnvironment() {
+        return environment;
+    }
+
+    public void setEnvironment(Environment environment) {
+        this.environment = environment;
     }
 }

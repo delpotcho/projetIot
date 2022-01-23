@@ -1,5 +1,7 @@
 package org.eheio.projet.iot.controller;
+import org.eheio.projet.iot.dto.request.NodeDataDto;
 import org.eheio.projet.iot.dto.request.NodeDto;
+import org.eheio.projet.iot.dto.response.EnvironmentDto;
 import org.eheio.projet.iot.dto.response.ResponseMessage;
 import org.eheio.projet.iot.model.Environment;
 import org.eheio.projet.iot.model.Node;
@@ -25,6 +27,8 @@ import java.util.stream.Collectors;
 public class NodeController {
     @Autowired
     private NodeService nodeService;
+    @Autowired
+    private NodeDataService nodeDataService;
     @Autowired
     private EnvironmentService environmentService;
     @Autowired
@@ -62,6 +66,7 @@ public class NodeController {
       return   modelMapper.map(node, NodeDto.class);
     }
 
+
     @DeleteMapping("/")
     public ResponseEntity<?> deleteNode(@RequestParam("node") NodeDto nodeDto) {
         Node node = modelMapper.map(nodeDto,Node.class);
@@ -69,11 +74,19 @@ public class NodeController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping("node/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<NodeDto> updateNode(@PathVariable("id") NodeDto nodeDto) {
         Node node = modelMapper.map(nodeDto ,Node.class);
         Node updateNode = nodeService.updateNode(node);
         NodeDto nodeDtoUpdate =modelMapper.map(updateNode,NodeDto.class);
         return ResponseEntity.ok(nodeDtoUpdate);
+    }
+    @GetMapping("/{id}/last")
+    public NodeDataDto getLastData(@PathVariable("id") UUID id){
+        Node node = nodeService.getUsNodeById(id);
+        if(node != null){
+            return modelMapper.map(nodeDataService.getLastDataByNode(node),NodeDataDto.class);
+        }
+        return  null;
     }
 }
