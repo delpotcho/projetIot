@@ -17,21 +17,16 @@ import { EnvironmentDetailComponent } from './Admin/Environment/environment-deta
 import { EnvironmentFormComponent } from './Admin/Environment/environment-form/environment-form.component';
 
 const routes: Routes = [
-  { path: 'admin', redirectTo: '/admin/dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: '/environment', pathMatch: 'full' },
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
   { path: 'register', component: SignUpComponent, pathMatch: 'full' },
 
   {
-    path: 'admin',
+    path: '',
     component: DashboardComponent,
     // canActivate:[AuthGuardService],
 
     children: [
-      {
-        path: 'dashboard',
-        component: HomeComponent,
-        pathMatch: 'full',
-      },
       {
         path: 'product',
         component: ProductComponent,
