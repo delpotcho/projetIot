@@ -31,7 +31,7 @@ public class ProduitServiceImpl implements ProduitService {
 
     @Override
     public void addProduit(Produit produit) {
-
+        produitRepository.save(produit);
     }
 
     @Override

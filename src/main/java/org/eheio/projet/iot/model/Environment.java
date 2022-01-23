@@ -20,6 +20,8 @@ public class Environment {
     private List<Category> categories;
     @OneToMany (mappedBy = "environment")
     private List<Node> nodes ;
+    @OneToMany(mappedBy = "environment")
+    private List<Produit> products;
     private double minHumidity;
     private double maxHumidity;
     private double minTemperature;
@@ -79,5 +81,21 @@ public class Environment {
 
     public void setNodes(List<Node> nodes) {
         this.nodes = nodes;
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
+    }
+
+    public List<Produit> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Produit> products) {
+        this.products = products;
     }
 }

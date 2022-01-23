@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Environment } from '../../Environment/Service/environment.service';
 import { ProductElement } from '../service/product.service';
 import { ProductService } from '../service/product.service';
 
@@ -10,25 +11,23 @@ import { ProductService } from '../service/product.service';
 export class ListBookComponent implements OnInit {
   headers: String[] = [
     'name',
-    'Max Temperature',
-    'Min Temperature',
-    'Max Humidity',
-    'Min Humidity',
+    'maxTemperature',
+    'minTemperature',
+    'maxHumidity',
+    'minHumidity',
   ];
   products: ProductElement[];
   order: number = 1;
+  @Input() environment:Environment;
   constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
-    this.productService.getProducts().subscribe(
-      (data) => {
-        console.log(data);
-        this.products = data;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    setTimeout(() => {
+    
+    this.products=this.environment?.products;
+    }, 1000);
+    
+   
   }
   deleteProduct(code: string) {
     this.productService.delteProduct(code);

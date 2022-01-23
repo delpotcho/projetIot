@@ -13,5 +13,5 @@ import java.util.UUID;
 public interface NodeDataRepository extends JpaRepository<NodeData,Long> {
      List<NodeData> getNodeDataByDateTimeBetween(LocalDateTime date1, LocalDateTime date2);
      NodeData getTopByOrderByDateTimeDesc();
-     List<NodeData> getTopByNodeIdOrderByDateTimeDesc(UUID id);
+     NodeData getTopByNodeIdOrderByDateTimeDesc(UUID id);
 }

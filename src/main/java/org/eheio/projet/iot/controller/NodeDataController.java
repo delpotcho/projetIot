@@ -7,6 +7,7 @@ import org.eheio.projet.iot.model.Node;
 import org.eheio.projet.iot.model.NodeData;
 import org.eheio.projet.iot.service.NodeDataService;
 import org.eheio.projet.iot.service.NodeService;
+import org.eheio.projet.iot.service.implementation.TelegramService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,7 +27,9 @@ public class NodeDataController {
     @Autowired
     private NodeDataService nodeDataService;
     @Autowired
-    ModelMapper modelMapper ;
+    private ModelMapper modelMapper ;
+    @Autowired
+    private TelegramService telegramService;
 
     /************* GET  DATA By [Hour,Day,Weekly,Monthly]**********************/
     /***!!!! change later !!!! **/
@@ -54,6 +57,9 @@ public class NodeDataController {
             NodeData nodeData = modelMapper.map(data,NodeData.class);
            nodeData.setNode(node);
             nodeDataService.saveNodeData(nodeData);
+            if(data.getTemperature()>node.getEnvironment().getMaxTemperature()){
+                telegramService.sendMessage("Temperature Warning");
+            }
             return ResponseEntity.ok(new ResponseMessage("data inserted", HttpStatus.OK));
         }catch(RuntimeException e){
             System.out.println(e.getMessage());

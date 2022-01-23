@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Chart, registerables } from 'chart.js';
-import { interval } from 'rxjs';
+import { InteropObservable, interval, Observable, Observer, Subscriber } from 'rxjs';
 import { NodeServiceService } from '../../Node/Service/node-service.service';
 import { randomColor } from 'randomcolor';
 import {
@@ -15,11 +15,21 @@ import util from '../../../Utils/utils.js';
   templateUrl: './environment-detail.component.html',
   styleUrls: ['./environment-detail.component.css'],
 })
-export class EnvironmentDetailComponent implements OnInit {
+export class EnvironmentDetailComponent implements OnInit,OnDestroy {
   environment: Environment;
   envronmentId: string;
   showDataMode: string;
   addNewNode:boolean;
+  temps:number[]=[];
+  humidity:number[]=[];
+  chartHumidity:Chart;
+  charTemperature:Chart;
+  datasetsTemperature: any[] = [];
+  datasetsHumidity: any[] = [];
+  labels:string[]=[];
+  shudeled:Subscriber<number>
+  inter;
+
   constructor(
     private envService: EnvironmentService,
     private activeRoute: ActivatedRoute,
@@ -31,6 +41,7 @@ export class EnvironmentDetailComponent implements OnInit {
     );
    
   }
+ 
   ngOnInit(): void {
      //get environment from server
      this.envService
@@ -43,11 +54,14 @@ export class EnvironmentDetailComponent implements OnInit {
     localStorage.setItem(key, color);
     return color;
   }
+  
   private initDatasetsTemperature(datasets) {
-    this.environment.nodes.forEach((n) =>
+    
+    this.environment.nodes.forEach((n) =>{
+    n.data.map((d) => this.temps.push(d.temperature));
       datasets.push({
         label: n.name,
-        data: n.data.map((d) => d.temperature),
+        data: this.temps,
         fill: false,
         borderColor:
           localStorage.getItem('color-' + n.name) == null
@@ -55,6 +69,7 @@ export class EnvironmentDetailComponent implements OnInit {
             : localStorage.getItem('color-' + n.name),
         tension: 0.1,
       })
+    }
     );
   }
 
@@ -68,9 +83,8 @@ export class EnvironmentDetailComponent implements OnInit {
       })
     );
   }
-
-  private drawChartTemperature(labels: string[], datasets: []) {
-    const chartTemp = new Chart('chart-temp', {
+  private drawChartTemperature(labels: string[], datasets: any[]) {
+    this.charTemperature  = new Chart('chart-temp', {
       type: 'line',
       data: {
         labels: labels,
@@ -106,8 +120,8 @@ export class EnvironmentDetailComponent implements OnInit {
       },
     });
   }
-  private drawChartHumidity(labels: string[], datasets: []) {
-    const chartHumidity = new Chart('chart-humidity', {
+  private drawChartHumidity(labels: string[], datasets: any[]) {
+     this.chartHumidity = new Chart('chart-humidity', {
       type: 'line',
       data: {
         labels: labels,
@@ -145,9 +159,6 @@ export class EnvironmentDetailComponent implements OnInit {
   }
 
   initData(): void {
-    let datasetsTemperature: [] = [];
-    let datasetsHumidity: [] = [];
-
    
       /*
           show lebels (show time) based on  the largest data for node   
@@ -156,21 +167,61 @@ export class EnvironmentDetailComponent implements OnInit {
           this case labels is data.datetime for node2
     */
 
-      let labels: string[] = this.environment.nodes
+       this.labels = this.environment.nodes
         ?.sort((n2, n1) => (n2.data.length > n1.data.length ? -1 : 1))[0]
         .data.map((d) => new Date(d.dateTime).toLocaleTimeString());
       /*********** initilize Datasets ***********/
-      this.initDatasetsTemperature(datasetsTemperature);
-      this.initDatasetsHumidity(datasetsHumidity);
+      this.initDatasetsTemperature(this.datasetsTemperature);
+      this.initDatasetsHumidity(this.datasetsHumidity);
       /***********End Initialise Datasets ***********/
 
-      this.drawChartTemperature(labels, datasetsTemperature);
-      this.drawChartHumidity(labels, datasetsHumidity);
+      this.drawChartTemperature(this.labels, this.datasetsTemperature);
+      this.drawChartHumidity(this.labels, this.datasetsHumidity);
     //reason to use timeout: wait to get Environment object
 
     //get data evrey 10s
-    const inter = interval(10000);
-    const data = inter.subscribe(() => {});
+     this.inter = interval(10000);
+    let changeChart:boolean=false;
+      this.shudeled = this.inter.subscribe(() => {
+
+      this.environment.nodes.forEach((n) =>{
+    
+      this.nodeService.getLastNodeData(n.id).subscribe(data=>{
+        console.log(this.labels[this.labels.length-1]);
+        
+        if(new Date(data['dateTime']).toLocaleTimeString()!=this.labels[this.labels.length-1]){
+
+        this.datasetsTemperature=[];
+        this.datasetsHumidity=[];
+          this.temps.push(data['temperature']);
+          this.humidity.push(data['humidity']);
+          this.labels.push(new Date(data['dateTime']).toLocaleTimeString())
+        
+          //generete new DataSet
+          this.datasetsTemperature.push({
+            label: n.name,
+            data: this.temps,
+            fill: false,
+            borderColor: localStorage.getItem('color-' + n.name),
+          });
+          changeChart=true;
+        }
+        
+        
+        
+      })
+     
+    }
+    );
+    if(changeChart){
+      this.charTemperature.destroy();
+      this.drawChartTemperature(this.labels,this.datasetsTemperature);
+      changeChart=false;
+    }
+ 
+
+      
+    });
   }
 
   public showFormNode(){
@@ -178,5 +229,8 @@ export class EnvironmentDetailComponent implements OnInit {
   }
   public hideForm(){
     this.addNewNode=false;
+  }
+  ngOnDestroy(): void {
+   this.shudeled.unsubscribe()
   }
 }

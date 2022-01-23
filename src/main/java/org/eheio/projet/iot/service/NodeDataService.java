@@ -13,5 +13,6 @@ public interface NodeDataService  {
     List<NodeData> getAllNodesHourData(LocalDateTime time1);
     List<NodeData> getAllNodesDayData(LocalDateTime dateTime1);
     NodeData saveNodeData(NodeData data);
+    NodeData getLastDataByNode(Node node);
 
 }
