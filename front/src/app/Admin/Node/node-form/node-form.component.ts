@@ -33,7 +33,9 @@ export class NodeFormComponent implements OnInit {
         this.router
           .navigateByUrl(this.router.url, { skipLocationChange: false })
           .then(() => {
-            this.router.navigate([this.router.url]);
+            this.router
+              .navigate([this.router.url])
+              .then(() => window.location.reload());
           });
       },
       (err) => console.log(err)

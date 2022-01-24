@@ -84,8 +84,11 @@ public class NodeController {
     @GetMapping("/{id}/last")
     public NodeDataDto getLastData(@PathVariable("id") UUID id){
         Node node = nodeService.getUsNodeById(id);
+
         if(node != null){
-            return modelMapper.map(nodeDataService.getLastDataByNode(node),NodeDataDto.class);
+            if(!node.getData().isEmpty()){
+                return modelMapper.map(nodeDataService.getLastDataByNode(node),NodeDataDto.class);
+            }
         }
         return  null;
     }

@@ -2,21 +2,33 @@
   <div class="overlay" (click)="hideForm()"></div>
   <app-node-form [environmentId]="environment.id"></app-node-form>
 </div>
-
-<p class="text-center">This page is Environment Detail 1</p>
 <div class="env-detail-header row justify-content-center">
   <div class="col-md-3 mb-3">
     <div class="shadow box">
-      <span>650 Produit</span>
+      <span>{{ environment?.products?.length }} Produit</span>
     </div>
   </div>
   <div class="col-md-3 mb-3">
     <div class="shadow box">
-      <span>4 Node</span>
+      <span>{{ environment?.nodes?.length }} Node</span>
     </div>
   </div>
   <div class="col-md-3 mb-3">
-    <div class="shadow box"><span>28 C°</span> <span>55%</span></div>
+    <div class="shadow box">
+      <p>
+        MAX :<i class="bx bxs-hot text-danger"></i>
+        {{ environment?.maxTemperature }} C° MIN :<i
+          class="bx bxs-hot text-danger"
+        ></i>
+        {{ environment?.minTemperature }} C°
+      </p>
+      <p>
+        MAX : <i class="bx bx-cloud-light-rain text-info"></i>
+        {{ environment?.maxHumidity }} % MIN :
+        <i class="bx bx-cloud-light-rain text-info"></i>
+        {{ environment?.minHumidity }} %
+      </p>
+    </div>
   </div>
 </div>
 <div class="env-detail-body">
@@ -53,7 +65,7 @@
             {{ node?.data[node.data.length - 1]?.humidity }} %</span
           >
           <div>
-            <small class="id-node">id:{{node?.id}}</small>
+            <small class="id-node">id:{{ node?.id }}</small>
           </div>
         </div>
       </div>

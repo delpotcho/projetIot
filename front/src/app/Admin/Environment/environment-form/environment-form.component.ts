@@ -34,11 +34,16 @@ export class EnvironmentFormComponent implements OnInit {
   onSubmit() {
     let environment: Environment = this.environmentForm.value;
     this.environmentService.newEnvironment(environment).subscribe(
-      (data) => console.log(data),
+      (data) => {
+        console.log(data);
+        this.returnToListEnvironment();
+      },
       (err) => console.log(err)
     );
   }
   returnToListEnvironment() {
-    this.router.navigateByUrl('/admin/environment');
+    this.router
+      .navigateByUrl('/environment')
+      .then(() => window.location.reload());
   }
 }
