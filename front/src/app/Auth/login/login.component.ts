@@ -10,7 +10,12 @@ import { AuthService, LoginInfo } from '../Service/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private authService:AuthService,private route:Router) { }
+  constructor(private authService:AuthService,private route:Router) {
+    if(localStorage.getItem("user")!=null && localStorage.getItem("user")=="conected"){
+      this.route.navigateByUrl("/environment");
+
+    }
+   }
 
   ngOnInit(): void {
   }
@@ -20,7 +25,7 @@ export class LoginComponent implements OnInit {
     console.log(form.value);
     this.authService.login(info).subscribe(data=>{
       localStorage.setItem("user","conected");
-      this.route.navigateByUrl("/admin/dashboard");
+      this.route.navigateByUrl("/environment");
     },err=>console.log(err));
   }
 

@@ -7,6 +7,14 @@
     <h4 class="text-center">New product</h4>
   </ng-template>
   <form (ngSubmit)="onSubmit()" [formGroup]="productForm">
+    <div class="form-group">
+      <label>Environment</label>
+      <select class="form-control" formControlName="environmentId">
+        <option *ngFor="let environment of environments" value="{{environment.id}}">
+          {{environment.name}}
+        </option>
+      </select>
+    </div>
     <div class="form-groupe">
       <label for="name">name</label>
       <input type="text" class="my-input" id="name" formControlName="name" />
@@ -105,7 +113,7 @@
       ><button
         class="my-btn product-btn"
         type="submit"
-        [disabled]="!productForm.valid"
+        
       >
         new
       </button></ng-template

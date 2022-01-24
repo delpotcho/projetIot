@@ -53,7 +53,7 @@
           <span
             class="text-center temperature fw-bold mr-2"
             TempColor
-            [lastTemp]="node?.data[node.data.length - 1]?.temperature"
+            [lastTemp]="node?.data[node?.data?.length - 1]?.temperature"
             [env]="environment"
           >
             <!-- show last temp for each node -->

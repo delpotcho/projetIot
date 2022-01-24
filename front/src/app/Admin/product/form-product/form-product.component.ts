@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Environment, EnvironmentService } from '../../Environment/Service/environment.service';
 import { ProductElement, ProductService } from '../service/product.service';
 @Component({
   selector: 'app-form-book',
@@ -16,10 +17,12 @@ export class FormProductComponent implements OnInit {
   idProduct: String;
   productForm: FormGroup;
   product: ProductElement;
+  environments:Environment[]=[];
   productData = {
     id: new FormControl(''),
     name: new FormControl(''),
-    maxTemperature: new FormControl('', [Validators.minLength(4), Validators.required]),
+    environmentId:new FormControl('',[Validators.required]),
+    maxTemperature: new FormControl('', [ Validators.required]),
     minTemperature: new FormControl('', [Validators.required]),
     maxHumidity: new FormControl('', [Validators.required]),
     minHumidity: new FormControl(0, [Validators.min(1), Validators.required]),
@@ -27,11 +30,14 @@ export class FormProductComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private productService: ProductService,
+    private environmentService:EnvironmentService,
     private router: Router,
     private activeRoute: ActivatedRoute
   ) {}
   ngOnInit(): void {
-    console.log('load child ');
+    this.environmentService.getEnvironments().subscribe(data=>{
+      this.environments=data;
+    })
     this.activeRoute.paramMap.subscribe((params) => {
       this.idProduct = params.get('id');
 
@@ -48,8 +54,9 @@ export class FormProductComponent implements OnInit {
             this.productData = {
               id: new FormControl(this.product.id),
               name: new FormControl(this.product.name),
+              environmentId:new FormControl(this.product.environment.id,[Validators.required]),
               maxTemperature: new FormControl(this.product.maxTemperature, [
-                Validators.minLength(4),
+              
                 Validators.required,
               ]),
               minTemperature: new FormControl(this.product.minTemperature, [
@@ -74,6 +81,8 @@ export class FormProductComponent implements OnInit {
   // @Input() books; //get books table from parent component
   // @Output() bookCreated = new EventEmitter<{code:string,title: string ,description:string,author:string,price:number}>(); //send new data to parent component
   onSubmit(): void {
+    console.log(this.productForm.value);
+    
     if (this.productForm.valid) {
       if (this.idProduct == null) {
         let numberItemInArray = this.productService
@@ -94,6 +103,6 @@ export class FormProductComponent implements OnInit {
   }
 
   returnToListProducts() {
-    this.router.navigate(['/admin/product']);
+    this.router.navigate(['/product']).then(()=>window.location.reload());
   }
 }

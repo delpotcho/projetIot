@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Environment } from '../../Environment/Service/environment.service';
 
 export interface ProductElement {
   id: number;
@@ -9,6 +10,7 @@ export interface ProductElement {
   minTemperature: number;
   maxHumidity: number;
   minHumidity: number;
+  environment:Environment
 }
 const server = 'http://localhost:8080';
 @Injectable({

@@ -184,9 +184,9 @@ export class EnvironmentDetailComponent implements OnInit, OnDestroy {
           this case labels is data.datetime for node2
     */
 
-    this.labels = this.environment.nodes
-      ?.sort((n2, n1) => (n2.data.length > n1.data.length ? -1 : 1))[0]
-      .data.map((d) => new Date(d.dateTime).toLocaleTimeString());
+    this.labels = this.environment?.nodes
+      ?.sort((n2, n1) => (n2?.data?.length > n1?.data?.length ? -1 : 1))[0]
+      .data.map((d) => new Date(d?.dateTime).toLocaleTimeString());
     /*********** initilize Datasets ***********/
     this.initDatasetsTemperature(this.datasetsTemperature);
     this.initDatasetsHumidity(this.datasetsHumidity);
@@ -246,10 +246,14 @@ export class EnvironmentDetailComponent implements OnInit, OnDestroy {
             let node = this.charTemperature.data.datasets.find(
               (dts) => dts.label == data['nameNode']
             );
+            let nodeH = this.chartHumidity.data.datasets.find(
+              (dts) => dts.label == data['nameNode']
+            );
             console.log('before');
             console.log(node?.data);
             console.log(data['nameNode']);
             node?.data?.push(data['temperature']);
+            nodeH?.data?.push(data['humidity']);
             this.charTemperature.data.labels.push(
               new Date(data['dateTime']).toLocaleTimeString()
             );
@@ -257,6 +261,7 @@ export class EnvironmentDetailComponent implements OnInit, OnDestroy {
             console.log(this.charTemperature.data.labels);
             console.log(node?.data);
             this.charTemperature.update();
+            this.chartHumidity.update();
           }
         });
       });
@@ -270,6 +275,6 @@ export class EnvironmentDetailComponent implements OnInit, OnDestroy {
     this.addNewNode = false;
   }
   ngOnDestroy(): void {
-    this.shudeled.unsubscribe();
+    this.shudeled?.unsubscribe();
   }
 }

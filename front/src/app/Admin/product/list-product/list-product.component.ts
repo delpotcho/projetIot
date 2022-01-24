@@ -18,14 +18,21 @@ export class ListBookComponent implements OnInit {
   ];
   products: ProductElement[];
   order: number = 1;
-  @Input() environment:Environment;
+  @Input() environment:Environment=null;
   constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
     setTimeout(() => {
-    
-    this.products=this.environment?.products;
+      if(this.environment==null){
+        this.productService.getProducts().subscribe(data=>{
+          this.products=data
+        })
+      }else{
+        this.products=this.environment?.products;
+      }
     }, 1000);
+    
+   
     
    
   }
